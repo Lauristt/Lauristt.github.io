@@ -397,8 +397,8 @@
             <h2>Featured Projects</h2>
             <ul>
               <li>
-                Slum Detection via CNN (MIT Sloan)
-                <strong><a href="https://github.com/Lauristt/slumworld" target="_blank">Github</a></strong> – Led a 5-person RA team in developing attention-augmented UNet pipelines on 100k+ labels, incorporating CRFs, domain adaptation, and data augmentation. Achieved a 25% F1-score uplift via training set optimization. Mentored under MIT Sloan and Cornell GSAS faculty.<button class="details-btn" data-target="#slum-details">View Details</button>
+                <strong>Slum Detection via CNN (MIT Sloan)</strong>
+                <strong><a href="https://github.com/Lauristt/slumworld" target="_blank">Github</a></strong> – Led a 5-person RA team in developing attention-augmented UNet pipelines on 100k+ labels, incorporating CRFs, domain adaptation, and data augmentation. Achieved a <strong>25% F1-score uplift </strong>via training set optimization. Mentored under MIT Sloan and Cornell GSAS faculty.<button class="details-btn" data-target="#slum-details">View Details</button>
                 
                 <div id="slum-details" class="project-details">
                   <h3>Project Details: Slum Detection with Attention U-Net v2</h3>
@@ -519,7 +519,7 @@
                 </div>
               </li>
               <li>
-                Dupire-PINN Option Pricing (HKU Business School)
+                <strong>Dupire-PINN Option Pricing (HKU Business School)</strong>
                 <strong><a href="https://github.com/Lauristt/pinn_with_localvol_calculation" target="_blank">Github</a></strong> – Developed a Physics-Informed Neural Network (PINN) framework for European SPX option pricing, embedding the Black–Scholes PDE as a physics constraint. Integrated residual connections (ResNet blocks) and adaptive loss-weighting to stabilize training and accelerate convergence. Fine-tuned the trained model with a Dupire local volatility calibration, using RBF-interpolated volatility surfaces to capture skew and smile effects. Achieved a <strong>36% MSE reduction versus BSM </strong>and improved stability in volatile regimes, providing a scalable architecture for derivative pricing under local volatility dynamics.<button class="details-btn" data-target="#pinn-details">View Details</button>
                 <div id="pinn-details" class="project-details">
                   <h3>Project Details: Dupire-PINN Option Pricing</h3>
@@ -581,16 +581,16 @@
                 </div>
               </li>
               <li>
-                Financial Sentiment Analysis
+                <strong>Financial Sentiment Analysis</strong>
                 <strong><a href="https://github.com/Lauristt/Financial-Sentiment-Analysis" target="_blank">Github</a></strong> – Constructed a full NLP pipeline with custom sentiment scoring for Chinese equity research reports. Automated data scraping (Eastmoney), risk-word filtering, and scoring dictionary optimization for signal extraction.
               </li>
               <li>
-                Kaggle AES Scoring (Silver Medal)
+                <strong>Kaggle AES Scoring (Silver Medal)</strong>
                 <strong><a href="https://github.com/Lauristt/kaggle_aesScore_solution" target="_blank">Github</a></strong> – Silver Medal: Built hybrid DeBERTa-v3 + GBDT model with handcrafted NLP features and designed a QWK-focused optimizer. Implemented custom penalty weighting and threshold tuning to directly maximize leaderboard metric.
               </li>
               <li>
-                Kaggle DRW Crypto Prediction (Silver Medal, to be updated soon)
-                <strong><a href="https://github.com/Lauristt/kaggle_drw_prediction_challenge" target="_blank">Kaggle</a></strong> – Silver Medal: Designed crypto price forecasting pipeline with microstructure-aware features (Garman-Klass volatility, order flow, and rolling momentum). Combined lagged regression with multi-horizon modeling.
+                <strong>Kaggle DRW Crypto Prediction (Silver Medal, to be updated soon)</strong>
+                <strong><a href="https://github.com/Lauristt/kaggle_drw_prediction_challenge" target="_blank">Kaggle</a></strong> – Silver Medal: Designed crypto price forecasting pipeline with microstructure-aware features (Garman-Klass volatility, order flow, and rolling momentum). Combined lagged regression with multi-horizon modeling. Achieved <strong>0.14 Correlation (market signal)</strong> with over 500,000 hourly level data points.
               </li>
             </ul>
         </div>
@@ -637,7 +637,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 const btnText = isShown ? 'Hide Details' : 'View Details';
                 this.textContent = btnText;
 
-                // Add or remove the "Fold Details" button
                 let foldBtn = detailsPanel.querySelector('.fold-details-btn');
                 if (isShown && !foldBtn) {
                     foldBtn = document.createElement('button');
@@ -646,12 +645,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     foldBtn.addEventListener('click', function() {
                         detailsPanel.classList.remove('show');
                         btn.textContent = 'View Details';
-                        // No need to remove the button here, as the panel collapsing will hide it.
-                        // It will be removed when the panel is shown again and then hidden via the main button.
                     });
                     detailsPanel.appendChild(foldBtn);
                 } else if (!isShown && foldBtn) {
-                   // Let the button stay, it will be hidden with the panel.
                 }
             }
         });
