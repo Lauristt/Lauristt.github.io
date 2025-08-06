@@ -1,0 +1,348 @@
+/* details.css */
+.details-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.3s;
+}
+.details-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Downsample / Upsample 小字样式 */
+.unet-box small {
+    color: #777;
+    font-style: italic;
+    font-size: 11px;
+  }
+  
+  /* SDI 多箭头布局 */
+  .sdi-arrows {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 5px;
+  }
+  
+  .sdi-input-arrow, .sdi-output-arrow {
+    font-size: 1.5em;
+    color: #888;
+  }
+
+.project-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.7s ease-in-out;
+    background-color: #ffffff;
+    border-radius: 8px;
+    margin-top: 15px;
+    padding: 0 25px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.project-details.show {
+    max-height: 4000px; /* Adjust if content is taller */
+    padding: 25px;
+    transition: max-height 1.2s ease-in-out;
+}
+
+.project-details h3 {
+    color: #1a1a1a;
+    margin-top: 0;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+}
+
+/* UNet Architecture Diagram Styles */
+.architecture-diagram {
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    padding: 20px 0;
+}
+.architecture-diagram h4 {
+    font-weight: bold;
+    color: #333;
+}
+.unet-flex-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+.unet-path {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 10px;
+}
+.unet-box {
+    background-color: #f0f8ff;
+    border: 1px solid #b0c4de;
+    border-radius: 4px;
+    padding: 10px 15px;
+    margin: 5px 0;
+    min-width: 120px;
+    font-size: 12px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+}
+.unet-box.encoder { background-color: #e6f7ff; border-color: #91d5ff; }
+.unet-box.attention { background-color: #fffbe6; border-color: #ffe58f; }
+.unet-box.sdi { background-color: #f6ffed; border-color: #b7eb8f; }
+.unet-box.decoder { background-color: #fff0f6; border-color: #ffadd2; }
+
+.arrow {
+    font-size: 24px;
+    color: #888;
+    margin: 5px 0;
+}
+.skip-connection {
+    font-style: italic;
+    color: #555;
+    font-size: 12px;
+}
+
+/* Code Snippet Styles */
+.code-showcase {
+    margin-top: 20px;
+}
+.code-toggle {
+    background-color: #f1f1f1;
+    color: #444;
+    cursor: pointer;
+    padding: 12px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+.code-toggle:hover {
+    background-color: #ddd;
+}
+.code-toggle::before {
+    content: '\\25B6\\00a0'; /* Right-pointing triangle */
+    font-family: sans-serif;
+}
+.code-toggle.active::before {
+    content: '\\25BC\\00a0'; /* Down-pointing triangle */
+}
+.code-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out;
+}
+.code-content.show {
+    max-height: 1000px; /* Adjust if code is longer */
+}
+pre {
+    background-color: #2d2d2d;
+    color: #f8f8f2;
+    padding: 15px;
+    border-radius: 5px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-size: 14px;
+}
+/* Basic Syntax Highlighting */
+.code-keyword { color: #ff79c6; font-weight: bold; }
+.code-class { color: #8be9fd; font-weight: bold; }
+.code-def { color: #50fa7b; font-weight: bold; }
+.code-comment { color: #6272a4; font-style: italic; }
+.code-string { color: #f1fa8c; }
+.code-number { color: #bd93f9; }
+.code-decorator { color: #ffb86c; }
+
+
+
+.Burkina-container {
+    text-align: center; /* 图片和注释居中 */
+    margin: 20px auto;
+  }
+  
+  .Burkina-image {
+    display: block; /* 1. 将图片设置为块级元素 */
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 15px auto; /* 2. 上下边距15px，左右自动 */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+  
+  .Burkina-container figcaption {
+    font-size: 0.9em;
+    color: #555;
+    margin-top: 8px;
+    font-style: italic; /* 注释斜体 */
+  }
+  
+
+  .PINN-container {
+    text-align: center; /* 图片和注释居中 */
+    margin: 20px auto;
+  }
+  
+  .PINN-image {
+    width: 800px;
+    height: auto;
+    display: block;
+    margin: 0 auto; /* 水平居中 */
+  }
+  
+  .PINN-container figcaption {
+    font-size: 0.9em;
+    color: #555;
+    margin-top: 8px;
+    font-style: italic; /* 注释斜体 */
+  }
+  
+
+
+  /* --- UNET DIAGRAM STYLES (Optimized) --- */
+.architecture-diagram { 
+    text-align: center; 
+    padding: 20px 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 统一字体 */
+}
+.architecture-diagram h4 {
+    font-size: 1.3em; /* 增大标题字号 */
+    font-weight: 600;
+    color: #2c3e50; /* 使用更柔和的深色 */
+    margin-bottom: 30px; /* 增加标题和图表间距 */
+}
+.unet-flex-container { 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; /* 垂直居中对齐 */
+    flex-wrap: wrap; 
+    gap: 15px; /* 增加元素间距 */
+}
+.unet-path { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    padding: 0 10px; 
+}
+.unet-box { 
+    border-radius: 8px; /* 增加圆角 */
+    padding: 12px 18px; 
+    margin: 5px 0; 
+    min-width: 160px; /* 增加最小宽度 */
+    font-size: 14px; /* 增大方框内字体 */
+    font-weight: 500;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08); /* 优化阴影效果 */
+    border: 1px solid transparent; /* 预设透明边框 */
+    transition: all 0.3s ease;
+}
+.unet-box:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+}
+.unet-box.encoder { background-color: #eaf6ff; border-color: #bde0fe; }
+.unet-box.decoder { background-color: #fff0f6; border-color: #ffd6e7; }
+.unet-box small { 
+    color: #555; /* 调整小字颜色 */
+    font-style: normal; /* 取消斜体，更清晰 */
+    font-size: 12px;
+    font-weight: 400;
+}
+.sdi-module-large { 
+    background-color: #34495e; /* 更深的背景色 */
+    color: white; 
+    font-weight: 600; /* 调整字重 */
+    writing-mode: vertical-rl; 
+    text-orientation: mixed; 
+    padding: 20px 15px; 
+    border-radius: 10px; /* 增加圆角 */
+    font-size: 2.8em; 
+    letter-spacing: 6px; /* 调整字母间距 */
+    height: 280px; /* 增加高度 */
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.sdi-arrows { 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-around; 
+    align-items: center; 
+    margin: 0 8px; 
+}
+.sdi-input-arrow, .sdi-output-arrow { 
+    font-size: 1.8em; /* 增大箭头 */
+    color: #777; 
+}
+.arrow { 
+    font-size: 28px; /* 增大箭头 */
+    color: #999; 
+    margin: 6px 0; 
+}
+.skip-connection { 
+    font-style: normal; /* 取消斜体 */
+    color: #444; /* 调整颜色 */
+    font-size: 14px; /* 增大字号 */
+    margin-top: 20px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+/* --- MISC & FIGURE STYLES --- */
+.Burkina-container, .PINN-container { text-align: center; margin: 20px auto; }
+.Burkina-container figcaption, .PINN-container figcaption { font-size: 0.9em; color: #555; margin-top: 8px; font-style: italic; }
+.Burkina-image {
+    display: block;
+    max-width: 100%;
+    max-height: 300px; /* 设置最大高度，您可以根据需要调整 */
+    height: auto;
+    border-radius: 8px;
+    margin: 15px auto;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.PINN-image {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 15px auto;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.formula_pinn { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.special-image { max-width: 450px; height: auto; }
+
+/* Style for the fold details button */
+.fold-details-btn {
+    background-color: #6c757d; /* A neutral background */
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: 500;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-top: 20px;
+    display: block; /* Make it a block-level element */
+    margin-left: auto;
+    margin-right: auto; /* Center the button */
+    text-align: center; /* Ensure text is centered within the button */
+}
+
+.fold-details-btn:hover {
+    background-color: #545b62;
+    transform: translateY(-1px);
+}
+

@@ -6,21 +6,65 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <title>Yuting (Lauris) Li - Quantitative Research & Trading</title>
+  <title>Yuting (Lauris) Li - Quantitative Research, Machine Learning</title>
   <style>
+    /* --- BASE & LAYOUT STYLES --- */
+    html {
+        scroll-behavior: smooth;
+    }
     body {
-      font-family: Arial, sans-serif;
-      margin: 40px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       line-height: 1.6;
       background-color: #f9f9f9;
       color: #333;
+      margin: 0;
+    }
+    .page-container {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .left-panel {
+        width: 35%;
+        background-color: #f1f1f1;
+        padding: 40px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        overflow-y: auto;
+        box-sizing: border-box;
+    }
+    .right-panel {
+        width: 65%;
+        margin-left: 35%;
+        padding: 40px;
+        box-sizing: border-box;
     }
     h1, h2 {
       color: #1a1a1a;
+      font-weight: 600;
+    }
+    h1 {
+        font-size: 2.2em;
+    }
+    h2 {
+        border-bottom: 2px solid #007bff;
+        padding-bottom: 10px;
+        margin-top: 0;
     }
     a {
       color: #0066cc;
       text-decoration: none;
+    }
+    a:hover {
+        text-decoration: underline;
+    }
+    ul {
+      padding-left: 20px;
+      list-style-type: square;
+    }
+    li {
+      margin-bottom: 12px;
     }
     .section {
       margin-bottom: 30px;
@@ -34,85 +78,516 @@
       height: 150px;
       border-radius: 50%;
       object-fit: cover;
-      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+      box-shadow: 0 0 12px rgba(0,0,0,0.15);
+      border: 3px solid white;
+    }
+    
+    /* --- PROJECT DETAILS & BUTTON STYLES --- */
+    .details-btn {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 5px 12px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 0.9em;
+        font-weight: 600;
+        transition: background-color 0.3s, transform 0.2s;
+        margin-left: 8px;
+    }
+    .details-btn:hover {
+        background-color: #0056b3;
+        transform: translateY(-1px);
+    }
+    .project-details {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.7s ease-in-out;
+        background-color: #ffffff;
+        border-radius: 8px;
+        margin-top: 15px;
+        padding: 0 25px;
+        border: 1px solid #e0e0e0;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .project-details.show {
+        max-height: 6000px;
+        padding: 25px;
+        transition: max-height 1.2s ease-in-out;
+    }
+    .project-details h3 {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        font-weight: 600;
+        color: #1a1a1a;
+        margin-top: 0;
+        border-bottom: 2px solid #007bff;
+        padding-bottom: 10px;
+    }
+    .project-details h4 {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        font-weight: 600;
+        font-size: 1.1em;
+        color: #333;
+    }
+    .project-image, .Burkina-image, .PINN-image {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin: 15px auto;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        display: block;
+    }
+    .formula {
+        background-color: #f0f0f0;
+        padding: 15px;
+        border-radius: 5px;
+        margin: 15px 0;
+        font-family: 'Courier New', Courier, monospace;
+        text-align: center;
+        font-size: 1.1em;
+        overflow-x: auto;
+    }
+
+    /* --- UNET DIAGRAM STYLES (Optimized) --- */
+    .architecture-diagram { 
+        text-align: center; 
+        padding: 20px 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 统一字体 */
+    }
+    .architecture-diagram h4 {
+        font-size: 1.3em; /* 增大标题字号 */
+        font-weight: 600;
+        color: #2c3e50; /* 使用更柔和的深色 */
+        margin-bottom: 30px; /* 增加标题和图表间距 */
+    }
+    .unet-flex-container { 
+        display: flex; 
+        justify-content: center; 
+        align-items: center; /* 垂直居中对齐 */
+        flex-wrap: wrap; 
+        gap: 15px; /* 增加元素间距 */
+    }
+    .unet-path { 
+        display: flex; 
+        flex-direction: column; 
+        align-items: center; 
+        padding: 0 10px; 
+    }
+    .unet-box { 
+        border-radius: 8px; /* 增加圆角 */
+        padding: 12px 18px; 
+        margin: 5px 0; 
+        min-width: 160px; /* 增加最小宽度 */
+        font-size: 14px; /* 增大方框内字体 */
+        font-weight: 500;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.08); /* 优化阴影效果 */
+        border: 1px solid transparent; /* 预设透明边框 */
+        transition: all 0.3s ease;
+    }
+    .unet-box:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    }
+    .unet-box.encoder { background-color: #eaf6ff; border-color: #bde0fe; }
+    .unet-box.decoder { background-color: #fff0f6; border-color: #ffd6e7; }
+    .unet-box small { 
+        color: #555; /* 调整小字颜色 */
+        font-style: normal; /* 取消斜体，更清晰 */
+        font-size: 12px;
+        font-weight: 400;
+    }
+    .sdi-module-large { 
+        background-color: #34495e; /* 更深的背景色 */
+        color: white; 
+        font-weight: 600; /* 调整字重 */
+        writing-mode: vertical-rl; 
+        text-orientation: mixed; 
+        padding: 20px 15px; 
+        border-radius: 10px; /* 增加圆角 */
+        font-size: 2.8em; 
+        letter-spacing: 6px; /* 调整字母间距 */
+        height: 280px; /* 增加高度 */
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .sdi-arrows { 
+        display: flex; 
+        flex-direction: column; 
+        justify-content: space-around; 
+        align-items: center; 
+        margin: 0 8px; 
+    }
+    .sdi-input-arrow, .sdi-output-arrow { 
+        font-size: 1.8em; /* 增大箭头 */
+        color: #777; 
+    }
+    .arrow { 
+        font-size: 28px; /* 增大箭头 */
+        color: #999; 
+        margin: 6px 0; 
+    }
+    .skip-connection { 
+        font-style: normal; /* 取消斜体 */
+        color: #444; /* 调整颜色 */
+        font-size: 14px; /* 增大字号 */
+        margin-top: 20px;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* --- CODE SNIPPET STYLES --- */
+    .code-showcase { margin-top: 20px; }
+    .code-details { margin-bottom: 5px; }
+    .code-summary { font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; background-color: #e9ecef; color: #444; cursor: pointer; padding: 12px; width: 100%; text-align: left; outline: none; font-size: 16px; font-weight: 600; transition: background-color 0.3s; border-radius: 5px; list-style: none; }
+    .code-summary:hover { background-color: #dee2e6; }
+    .code-summary::-webkit-details-marker { display: none; }
+    .code-summary::before { content: '▶'; margin-right: 10px; display: inline-block; transition: transform 0.2s ease-in-out; }
+    .code-details[open] > .code-summary::before { transform: rotate(90deg); }
+    .code-details[open] > .code-summary { border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+    pre { background-color: #2d2d2d; color: #f8f8f2; padding: 15px; border-radius: 0 0 5px 5px; margin-top: 0; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word; font-size: 14px; border: 1px solid #dee2e6; border-top: none; }
+    .code-keyword { color: #ff79c6; font-weight: bold; }
+    .code-class { color: #8be9fd; font-weight: bold; }
+    .code-def { color: #50fa7b; font-weight: bold; }
+    .code-comment { color: #6272a4; font-style: italic; }
+    .code-string { color: #f1fa8c; }
+    .code-number { color: #bd93f9; }
+    .code-decorator { color: #ffb86c; }
+
+    /* --- MISC & FIGURE STYLES --- */
+    .Burkina-container, .PINN-container { text-align: center; margin: 20px auto; }
+    .Burkina-container figcaption, .PINN-container figcaption { font-size: 0.9em; color: #555; margin-top: 8px; font-style: italic; }
+    .formula_pinn { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .special-image { max-width: 450px; height: auto; }
+
+    /* --- RESPONSIVE DESIGN (COMPATIBILITY) --- */
+    @media (max-width: 1024px) {
+        .page-container {
+            flex-direction: column;
+        }
+        .left-panel {
+            position: static;
+            width: 100%;
+            height: auto;
+            border-right: none;
+            border-bottom: 2px solid #ccc;
+        }
+        .right-panel {
+            margin-left: 0;
+            width: 100%;
+        }
+    }
+    @media (max-width: 768px) {
+        .left-panel, .right-panel {
+            padding: 25px;
+        }
+        h1 {
+            font-size: 1.8em;
+        }
     }
   </style>
 </head>
 <body>
 
-  <div class="photo">
-    <img src="profile.jpg" alt="Yuting Li" />
-  </div>
+<div class="page-container">
+    <aside class="left-panel">
+      <div class="photo">
+        <img src="profile.jpg" alt="Yuting Li" />
+      </div>
 
-  <h1>Yuting (Lauris) Li</h1>
-  <p><strong>Location:</strong> Chicago, IL<br/>
-     <strong>Email:</strong> laurisli@uchicago.edu<br/>
-     <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/yuting-li-4146a4287/" target="_blank">Yuting Li</a><br/>
-     <strong>Download CV:</strong> <a href="Yuting_CV.pdf" download>Download PDF</a>
-  </p>
+      <h1>Yuting (Lauris) Li</h1>
+      <p>
+        <strong>Location:</strong> Chicago, IL, USA<br/>
+        <strong>Email:</strong> laurisli@uchicago.edu<br/>
+        <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/yuting-li-4146a4287/" target="_blank">Yuting Li</a><br/>
+        <strong>CV:</strong> <a href="Yuting_CV.pdf" download>Download</a>
+      </p>
 
-  <div class="section">
-    <h2>About Me</h2>
-    <p>
-      I'm currently pursuing a Master of Science in Financial Mathematics at the University of Chicago, with a strong foundation in quantitative finance, deep learning, and numerical methods. I’m passionate about developing robust trading models and pricing derivatives using data-driven and mathematical techniques.
-    </p>
-  </div>
+      <div class="section">
+        <h2>About Me</h2>
+        <p>
+          MS Financial Mathematics candidate at UChicago with a strong focus on alpha generation, risk modeling, and deep learning applications in trading. Experienced in building scalable pricing models and predictive pipelines across derivatives and macro strategies.
+        </p>
+      </div>
+    </aside>
 
-  <div class="section">
-    <h2>Technical Skills</h2>
-    <ul>
-      <li><strong>Programming:</strong> Python (PyTorch, NumPy, Pandas), C++, MATLAB, Jupyter, Linux, LaTeX</li>
-      <li><strong>Tools:</strong> Stata, MS Office</li>
-      <li><strong>Topics:</strong> Machine Learning, Deep Learning, Option Pricing, Statistical Modeling, Time-Series</li>
-    </ul>
-  </div>
+    <main class="right-panel">
+        <div class="section">
+            <h2>Technical Skills</h2>
+            <ul>
+              <li><strong>Programming:</strong> Python (PyTorch, NumPy, Pandas), C++, MATLAB, Jupyter, Linux, LaTeX, Stata, VBA</li>
+              <li><strong>Quant Tools:</strong> Portfolio Theory, Option Pricing (BSM, Dupire), Stochastic Calculus, Local Volatility, Regression (linear, residual)</li>
+              <li><strong>Topics:</strong> Machine Learning, Deep Learning, Derivatives Market, Statistical Modeling, Time-Series</li>
+              <li><strong>ML Techniques:</strong> GBDT, Temporal CNN, DeBERTa, U-Net, PINN, CRF, Domain Adaptation, Reinforcement Learning, Feature Engineering, Optimization (SGD, Adam, etc.)</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>Featured Projects</h2>
+            <ul>
+              <li>
+                Slum Detection via CNN (MIT Sloan)
+                <strong><a href="https://github.com/Lauristt/slumworld" target="_blank">Github</a></strong> – Led a 5-person RA team in developing attention-augmented UNet pipelines on 100k+ labels, incorporating CRFs, domain adaptation, and data augmentation. Achieved a 25% F1-score uplift via training set optimization. Mentored under MIT Sloan and Cornell GSAS faculty.<button class="details-btn" data-target="#slum-details">View Details</button>
+                
+                <div id="slum-details" class="project-details">
+                  <h3>Project Details: Slum Detection with Attention U-Net v2</h3>
+                  <div class="architecture-diagram">
+                    <h4>Attention U-Net v2 Architecture Overview</h4>
+                    <div class="unet-flex-container">
+                        <div class="unet-path encoder-path">
+                            <div class="unet-box encoder">Feature Level 1<br><small>Downsample</small></div> <div class="arrow">&rarr;</div>
+                            <div class="unet-box encoder">Feature Level 2<br><small>Downsample</small></div> <div class="arrow">&rarr;</div>
+                            <div class="unet-box encoder">Feature Level 3<br><small>Downsample</small></div> <div class="arrow">&rarr;</div>
+                            <div class="unet-box encoder">Feature Level 4<br><small>Downsample</small></div>
+                        </div>
+                        <div class="sdi-arrows">
+                            <div class="sdi-input-arrow">&rarr;</div> <div class="sdi-input-arrow">&rarr;</div> <div class="sdi-input-arrow">&rarr;</div> <div class="sdi-input-arrow">&rarr;</div>
+                        </div>
+                        <div class="unet-path">
+                            <div class="sdi-module-large">SDI</div>
+                        </div>
+                        <div class="sdi-arrows">
+                            <div class="sdi-output-arrow">&rarr;</div> <div class="sdi-output-arrow">&rarr;</div> <div class="sdi-output-arrow">&rarr;</div> <div class="sdi-output-arrow">&rarr;</div>
+                        </div>
+                        <div class="unet-path decoder-path">
+                            <div class="unet-box decoder"><small>Upsample</small><br>Feature Level 4</div> <div class="arrow">&uarr;</div>
+                            <div class="unet-box decoder"><small>Upsample</small><br>Feature Level 3</div> <div class="arrow">&uarr;</div>
+                            <div class="unet-box decoder"><small>Upsample</small><br>Feature Level 2</div> <div class="arrow">&uarr;</div>
+                            <div class="unet-box decoder"><small>Upsample</small><br>Feature Level 1</div>
+                        </div>
+                  </div>
+                    <p class="skip-connection">Supervision applied at multiple decoder stages with selective domain adaptation head</p>
+                </div>
+                  <p>The model structure is featured by a Transformer-based encoder and a multi-connection encoder–decoder bridge. Multi-level features extracted by the encoder are refined via the Semantics and Detail Infusion (SDI) module, which integrates high-level semantic information and low-level fine details using spatial–channel attention and a Hadamard product mechanism. Each feature level is enhanced by aligning resolutions across all levels and applying convolutional smoothing before fusion. The decoder reconstructs segmentation maps from the enriched multi-scale features, achieving higher accuracy with efficient FLOPs and GPU memory usage.</p>
+                  <p><strong>Selective Inference Results</strong></p>
+                  <figure class="Burkina-container">
+                    <img src="Bobo_Ouagadougou_image.png" alt="Bobo_Ouagadougou_image" class="Burkina-image">
+                    <figcaption><strong>Bobo to Ouagadougou – Model Inference Visualization</strong></figcaption>
+                  </figure>
+                  <div class="code-showcase">
+                      <h4>Core Code Implementation</h4>
+                      <details class="code-details">
+                        <summary class="code-summary">Channel & Spatial Attention Modules</summary>
+                        <pre><code class="language-python"><span class="code-comment"># Standard Convolutional Block Attention Module (CBAM)</span>
+<span class="code-keyword">class</span> <span class="code-class">ChannelAttention</span>(nn.Module):
+    <span class="code-keyword">def</span> <span class="code-def">__init__</span>(<span class="code-keyword">self</span>, in_planes, ratio=16):
+        <span class="code-keyword">super</span>().__init__()
+        <span class="code-keyword">self</span>.avg_pool = nn.AdaptiveAvgPool2d(1)
+        <span class="code-keyword">self</span>.max_pool = nn.AdaptiveMaxPool2d(1)
+        <span class="code-keyword">self</span>.fc = nn.Sequential(
+            nn.Conv2d(in_planes, in_planes // ratio, 1, bias=<span class="code-class">False</span>),
+            nn.ReLU(),
+            nn.Conv2d(in_planes // ratio, in_planes, 1, bias=<span class="code-class">False</span>)
+        )
+        <span class="code-keyword">self</span>.sigmoid = nn.Sigmoid()
+    <span class="code-keyword">def</span> <span class="code-def">forward</span>(<span class="code-keyword">self</span>, x):
+        avg_out = <span class="code-keyword">self</span>.fc(<span class="code-keyword">self</span>.avg_pool(x))
+        max_out = <span class="code-keyword">self</span>.fc(<span class="code-keyword">self</span>.max_pool(x))
+        <span class="code-keyword">return</span> <span class="code-keyword">self</span>.sigmoid(avg_out + max_out)
 
-  <div class="section">
-    <h2>Highlighted Projects</h2>
-    <ul>
-      <li>
-        <strong><a href="https://github.com/Lauristt/pinn_with_localvol_calculation" target="_blank">
-          Dupire-PINN Option Pricing (HKU Business School)</a></strong> – Constructed Physics-Informed Neural Networks using local volatility models to price SPX options; reduced MSE by 36% vs. Black-Scholes.
-      </li>
-      <li>
-        <strong><a href="https://github.com/Lauristt/slumworld" target="_blank">
-          Slum Detection via CNN (MIT Sloan)</a></strong> – Led a research assistant team to benchmark 7 CNN architectures on over 100,000 satellite labels with UNet-based pipelines. Constructed several computer vision pipeline and pre/post-processing algorithms.
-      </li>
-      <li>
-        <strong><a href="https://github.com/Lauristt/kaggle_aesScore_solution" target="_blank">
-          Financial Sentiment Analysis (Shanghai University of Finance and Economics, School of Finance)</a></strong> – Developed an end-to-end system for financial research report data processing and sentiment analysis, efficiently acquiring data from Eastmoney.com and performing automated content cleaning and precise sentiment scoring.
-      </li>
-      <li>
-        <strong><a href="https://github.com/Lauristt/kaggle_aesScore_solution" target="_blank">
-          Kaggle AES Scoring (Silver Medal)</a></strong> – Developed an essay assessment system using DeBERTa-v3-large + GBDT, designed a QWK-penalty optimizer inspired by stochastic gradient descent, and implemented embedded feature engineering.
-      </li>
-    </ul>
-  </div>
-  
+<span class="code-keyword">class</span> <span class="code-class">SpatialAttention</span>(nn.Module):
+    <span class="code-keyword">def</span> <span class="code-def">__init__</span>(<span class="code-keyword">self</span>, kernel_size=7):
+        <span class="code-keyword">super</span>().__init__()
+        <span class="code-keyword">self</span>.conv1 = nn.Conv2d(2, 1, kernel_size, padding=kernel_size//2, bias=<span class="code-class">False</span>)
+        <span class="code-keyword">self</span>.sigmoid = nn.Sigmoid()
+    <span class="code-keyword">def</span> <span class="code-def">forward</span>(<span class="code-keyword">self</span>, x):
+        avg_out = torch.mean(x, dim=1, keepdim=<span class="code-class">True</span>)
+        max_out, _ = torch.max(x, dim=1, keepdim=<span class="code-class">True</span>)
+        x = torch.cat([avg_out, max_out], dim=1)
+        <span class="code-keyword">return</span> <span class="code-keyword">self</span>.sigmoid(<span class="code-keyword">self</span>.conv1(x))</code></pre>
+                      </details>
+                      <details class="code-details">
+                        <summary class="code-summary">Pyramid Vision Transformer Attention</summary>
+                        <pre><code class="language-python"><span class="code-comment"># Attention mechanism from PVTv2 with Spatial Reduction</span>
+<span class="code-keyword">class</span> <span class="code-class">Attention</span>(nn.Module):
+    <span class="code-keyword">def</span> <span class="code-def">__init__</span>(<span class="code-keyword">self</span>, dim, num_heads=8, qkv_bias=<span class="code-class">False</span>, attn_drop=0., proj_drop=0., sr_ratio=1):
+        <span class="code-keyword">super</span>().__init__()
+        <span class="code-keyword">self</span>.dim = dim
+        <span class="code-keyword">self</span>.num_heads = num_heads
+        <span class="code-keyword">self</span>.scale = (dim // num_heads) ** -0.5
+        <span class="code-keyword">self</span>.sr_ratio = sr_ratio
+        <span class="code-keyword">self</span>.q = nn.Linear(dim, dim, bias=qkv_bias)
+        <span class="code-keyword">self</span>.kv = nn.Linear(dim, dim * 2, bias=qkv_bias)
+        <span class="code-keyword">self</span>.proj = nn.Linear(dim, dim)
+        <span class="code-keyword">if</span> sr_ratio > 1:
+            <span class="code-keyword">self</span>.sr = nn.Conv2d(dim, dim, kernel_size=sr_ratio, stride=sr_ratio)
+            <span class="code-keyword">self</span>.norm = nn.LayerNorm(dim)
+    <span class="code-keyword">def</span> <span class="code-def">forward</span>(<span class="code-keyword">self</span>, x, H, W):
+        B, N, C = x.shape
+        q = <span class="code-keyword">self</span>.q(x).reshape(B, N, <span class="code-keyword">self</span>.num_heads, C // <span class="code-keyword">self</span>.num_heads).permute(0, 2, 1, 3)
+        <span class="code-keyword">if</span> <span class="code-keyword">self</span>.sr_ratio > 1:
+            x_ = <span class="code-keyword">self</span>.sr(x.permute(0, 2, 1).reshape(B, C, H, W)).reshape(B, C, -1).permute(0, 2, 1)
+            kv = <span class="code-keyword">self</span>.kv(<span class="code-keyword">self</span>.norm(x_)).reshape(B, -1, 2, <span class="code-keyword">self</span>.num_heads, C // <span class="code-keyword">self</span>.num_heads).permute(2, 0, 3, 1, 4)
+        <span class="code-keyword">else</span>:
+            kv = <span class="code-keyword">self</span>.kv(x).reshape(B, -1, 2, <span class="code-keyword">self</span>.num_heads, C // <span class="code-keyword">self</span>.num_heads).permute(2, 0, 3, 1, 4)
+        k, v = kv[0], kv[1]
+        attn = (q @ k.transpose(-2, -1)) * <span class="code-keyword">self</span>.scale
+        x = (attn.softmax(dim=-1) @ v).transpose(1, 2).reshape(B, N, C)
+        <span class="code-keyword">return</span> <span class="code-keyword">self</span>.proj(x)
+</code></pre>
+                      </details>
+                      <details class="code-details">
+                        <summary class="code-summary">SDI (Semantic Distribution & Integration) Module</summary>
+                        <pre><code class="language-python"><span class="code-comment"># Integrates features from different scales.</span>
+<span class="code-keyword">class</span> <span class="code-class">SDI</span>(nn.Module):
+    <span class="code-keyword">def</span> <span class="code-def">__init__</span>(<span class="code-keyword">self</span>, channel):
+        <span class="code-keyword">super</span>().__init__()
+        <span class="code-keyword">self</span>.convs = nn.ModuleList([nn.Conv2d(channel, channel, 3, 1, 1) <span class="code-keyword">for</span> _ <span class="code-keyword">in</span> <span class="code-def">range</span>(4)])
+    <span class="code-keyword">def</span> <span class="code-def">forward</span>(<span class="code-keyword">self</span>, xs, anchor):
+        ans = torch.ones_like(anchor)
+        target_size = anchor.shape[-1]
+        <span class="code-keyword">for</span> i, x <span class="code-keyword">in</span> <span class="code-def">enumerate</span>(xs):
+            <span class="code-keyword">if</span> x.shape[-1] > target_size:
+                x = F.adaptive_avg_pool2d(x, (target_size, target_size))
+            <span class="code-keyword">elif</span> x.shape[-1] < target_size:
+                x = F.interpolate(x, size=(target_size, target_size), mode=<span class="code-string">'bilinear'</span>)
+            ans = ans * <span class="code-keyword">self</span>.convs[i](x)
+        <span class="code-keyword">return</span> ans</code></pre>
+                      </details>
+                  </div>
+                </div>
+              </li>
+              <li>
+                Dupire-PINN Option Pricing (HKU Business School)
+                <strong><a href="https://github.com/Lauristt/pinn_with_localvol_calculation" target="_blank">Github</a></strong> – Developed a Physics-Informed Neural Network (PINN) framework for European SPX option pricing, embedding the Black–Scholes PDE as a physics constraint. Integrated residual connections (ResNet blocks) and adaptive loss-weighting to stabilize training and accelerate convergence. Fine-tuned the trained model with a Dupire local volatility calibration, using RBF-interpolated volatility surfaces to capture skew and smile effects. Achieved a <strong>36% MSE reduction versus BSM </strong>and improved stability in volatile regimes, providing a scalable architecture for derivative pricing under local volatility dynamics.<button class="details-btn" data-target="#pinn-details">View Details</button>
+                <div id="pinn-details" class="project-details">
+                  <h3>Project Details: Dupire-PINN Option Pricing</h3>
+                  <h4>Theoretical Framework</h4>
+                  <p>This project leverages Physics-Informed Neural Networks (PINNs) to solve the Dupire equation for local volatility. By embedding the Partial Differential Equation (PDE) directly into the loss function, the model learns solutions that are consistent with financial mathematics principles, bypassing the need for traditional grid-based methods.</p>
+                  <div class="formula_pinn">
+                    <strong>PINN Loss Function :</strong>
+                    <img src="pinn_model.png" alt="PINN model loss function" class="special-image">
+                  </div>
+                  <p>The loss function is constructed as the collocation term (first term, validation results & real data point); PDE term (second term, validation results & PDE constraints) and Boundary term (third term, validation results & boundary constraints).</p>
+                  <div class="formula_pinn">
+                    <strong>Dupire Equation:</strong>
+                    <img src="Dupire_model.png" alt="Dupire equation" class="special-image">
+                  </div>
+                  <p>The core of the PINN is a neural network that approximates the option price C(S, K, T). The local volatility sigma=sigma(K, T) is also represented by a separate neural network. The total loss function is a composite of three main terms: Data Loss, PDE Loss (Physics Loss), and Boundary Condition Loss.</p>
+                  <p>Here we presents the inference outcomes of our models on SPX call option data compared with the following models: 1. Pure BSM; 2. Pure PINN; 3. Real Data.</p>
+                  <figure class="PINN-container">
+                    <img src="Figure_15.png" alt="Comparison with Dupire-FineTuned Model and BSM Model" class="PINN-image">
+                    <figcaption><strong>PINN-Dupire Model – Model Inference Visualization</strong></figcaption>
+                  </figure>
+                  <div class="code-showcase">
+                      <h4>Core Code Implementation</h4>
+                      <details class="code-details">
+                        <summary class="code-summary">Local Volatility Solver (Crank-Nicolson)</summary>
+                        <pre><code class="language-python"><span class="code-comment"># The solver provides a numerical solution to the PDE, which can be used as a baseline or for comparison.</span>
+<span class="code-keyword">class</span> <span class="code-class">CrankNicolsonSolver</span>(nn.Module):
+    <span class="code-keyword">def</span> <span class="code-def">__init__</span>(<span class="code-keyword">self</span>, dupire_model, r, q, device='cuda'):
+        <span class="code-keyword">super</span>().__init__()
+        <span class="code-keyword">self</span>.dupire = weakref.ref(dupire_model)
+        <span class="code-keyword">self</span>.r, <span class="code-keyword">self</span>.q, <span class="code-keyword">self</span>.device = r, q, device
+    <span class="code-keyword">def</span> <span class="code-def">solve</span>(<span class="code-keyword">self</span>, S0, K, T, M=100, N=100):
+        <span class="code-comment"># ... grid setup and boundary conditions ...</span>
+        <span class="code-keyword">for</span> j <span class="code-keyword">in</span> <span class="code-def">range</span>(N - 1, -1, -1):
+            <span class="code-comment"># Construct tridiagonal system and solve with Thomas Algorithm</span>
+            V[:, 1:-1, j] = <span class="code-keyword">self</span>.batch_tdma_solve(...)
+        <span class="code-keyword">return</span> torch.nn.functional.interpolate(V[:, :, 0].unsqueeze(1), size=S0.size(0)).squeeze()
+</code></pre>
+                      </details>
+                      <details class="code-details">
+                        <summary class="code-summary">PINN Training Step with Custom Loss</summary>
+                        <pre><code class="language-python"><span class="code-comment"># The train_step function calculates the composite loss for the PINN.</span>
+<span class="code-keyword">def</span> <span class="code-def">train_step</span>(model, X_real_batch, u_real_batch, X_exp_batch, u_exp_batch, r, lambda_params):
+    model.train()
+    u_pred = model(X_real_batch)
+    S, K, T, sigma = X_real_batch[:, 1], X_real_batch[:, 2], X_real_batch[:, 0], X_real_batch[:, 3]
+    <span class="code-comment"># Get numerical solution from Crank-Nicolson for comparison (BSM loss)</span>
+    <span class="code-keyword">with</span> torch.no_grad():
+        cn_prices = model.dupire.solver.batch_solve(S, K, T)
+    <span class="code-comment"># Calculate individual loss components</span>
+    raw_data_loss = F.mse_loss(u_pred, u_real_batch)
+    raw_bsm_loss = F.mse_loss(torch.tensor(cn_prices), u_pred)
+    raw_exp_loss = F.mse_loss(model(X_exp_batch), u_exp_batch)
+    <span class="code-comment"># Dynamically weight the losses and return total_loss</span>
+    total_loss = (final_lambda[0]*raw_data_loss + final_lambda[1]*raw_bsm_loss + final_lambda[2]*raw_exp_loss)
+    <span class="code-keyword">return</span> total_loss, lambda_params
+</code></pre>
+                      </details>
+                  </div>
+                </div>
+              </li>
+              <li>
+                Financial Sentiment Analysis
+                <strong><a href="https://github.com/Lauristt/Financial-Sentiment-Analysis" target="_blank">Github</a></strong> – Constructed a full NLP pipeline with custom sentiment scoring for Chinese equity research reports. Automated data scraping (Eastmoney), risk-word filtering, and scoring dictionary optimization for signal extraction.
+              </li>
+              <li>
+                Kaggle AES Scoring (Silver Medal)
+                <strong><a href="https://github.com/Lauristt/kaggle_aesScore_solution" target="_blank">Github</a></strong> – Silver Medal: Built hybrid DeBERTa-v3 + GBDT model with handcrafted NLP features and designed a QWK-focused optimizer. Implemented custom penalty weighting and threshold tuning to directly maximize leaderboard metric.
+              </li>
+              <li>
+                Kaggle DRW Crypto Prediction (Silver Medal, to be updated soon)
+                <strong><a href="https://github.com/Lauristt/kaggle_drw_prediction_challenge" target="_blank">Kaggle</a></strong> – Silver Medal: Designed crypto price forecasting pipeline with microstructure-aware features (Garman-Klass volatility, order flow, and rolling momentum). Combined lagged regression with multi-horizon modeling.
+              </li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>Professional Experience</h2>
+            <ul>
+              <li><strong>Huatai-PineBridge Fund, Quantitative Researcher Intern</strong> – Engineered high-frequency trading signals for government bond futures using Temporal CNNs, achieving 63% hit ratio. Replaced cross-entropy with focal loss, increasing pixel-level accuracy by 12% and F1-score by 0.14. Developed drawdown-controlled allocation strategies, maintaining Sharpe ratio > 1.5 under Q2 2024 volatility.</li>
+              <li><strong>Guotai Haitong (Jun'an) Securities, Quantitative Researcher Intern</strong> – Designed and backtested 3 factor-based alpha strategies on treasury bond futures, each with Sharpe ratio > 2.0. Built cluster-enhanced residual regression models to forecast fund duration, improving accuracy by 18%. Authored fixed-income hedge report reducing strategy drawdown by 8% (Q4 2022–Q1 2024).</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>Education</h2>
+            <ul>
+              <li><strong>The University of Chicago</strong> – M.S. in Financial Mathematics, Expected December 2026</li>
+              <li><strong>Shanghai University of Finance and Economics</strong> – B.S. in Financial Mathematics, June 2025</li>
+              <li><strong>University of California, Berkeley</strong> – Visiting Student in Applied Mathematics, December 2023</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>Languages & Interests</h2>
+            <ul>
+                <li>Mandarin (native), Japanese (basic), Spanish (basic)</li>
+                <li>Rock climbing, Hiking, Swimming, Volunteer work</li>
+            </ul>
+        </div>
+    </main>
+</div>
 
-  <div class="section">
-    <h2>Professional Experience</h2>
-    <ul>
-      <li><strong>Huatai-PineBridge Fund, Quantitative Researcher Intern</strong> – Built high-frequency models on bond futures using Temporal CNNs; achieved 63% hit ratio; optimized loss functions to improve accuracy.</li>
-      <li><strong>Guotai Haitong (Jun'an) Future, Quantitative Researcher Intern</strong> – Developed multi-factor strategies and residual regression models for bond fund analytics; improved model accuracy by 18%.</li>
-    </ul>
-  </div>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const detailsBtns = document.querySelectorAll('.details-btn');
 
-  <div class="section">
-    <h2>Education</h2>
-    <ul>
-      <li><strong>The University of Chicago</strong> – M.S. in Financial Mathematics (Expected 2026)</li>
-      <li><strong>Shanghai University of Finance and Economics</strong> – B.S. in Financial Mathematics</li>
-      <li><strong>University of California, Berkeley</strong> – Visiting Student in Applied Mathematics</li>
-    </ul>
-  </div>
+    detailsBtns.forEach(btn => {
+        btn.addEventListener('click', function (event) {
+            event.preventDefault();
+            const targetId = this.dataset.target;
+            const detailsPanel = document.querySelector(targetId);
 
-  <div class="section">
-    <h2>Languages & Interests</h2>
-    <p>Mandarin (native), Japanese (basic), Spanish (basic)</p>
-    <p>Piano, hiking, swimming, rock climbing, volunteer work</p>
-  </div>
+            if (detailsPanel) {
+                const isShown = detailsPanel.classList.toggle('show');
+                const btnText = isShown ? 'Hide Details' : 'View Details';
+                this.textContent = btnText;
+
+                // Add or remove the "Fold Details" button
+                let foldBtn = detailsPanel.querySelector('.fold-details-btn');
+                if (isShown && !foldBtn) {
+                    foldBtn = document.createElement('button');
+                    foldBtn.classList.add('fold-details-btn');
+                    foldBtn.textContent = 'Fold Details';
+                    foldBtn.addEventListener('click', function() {
+                        detailsPanel.classList.remove('show');
+                        btn.textContent = 'View Details';
+                        this.remove(); // Remove the fold button when clicked
+                    });
+                    detailsPanel.appendChild(foldBtn);
+                } else if (!isShown && foldBtn) {
+                    foldBtn.remove();
+                }
+            }
+        });
+    });
+});
+</script>
 
 </body>
 </html>
-
