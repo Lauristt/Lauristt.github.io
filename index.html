@@ -8,6 +8,7 @@
   <meta http-equiv="Expires" content="0">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
   <title>Yuting (Lauris) Li - Quantitative Research, Machine Learning</title>
+  <link rel="icon" type="image/png" href="favicon.png">
   <style>
     html {
         scroll-behavior: smooth;
@@ -25,7 +26,8 @@
 
     .left-panel {
     background: linear-gradient(180deg,#f8f8fa,#f2f3f6);
-    border-right: 1px solid #e6e6e9;
+    /* border-right: 1px solid #e6e6e9; */
+    position: relative;
     font-family: -apple-system, system-ui, BlinkMacSystemFont,
                "Helvetica Neue", Arial, "PingFang SC",
                "Hiragino Sans GB", "Microsoft YaHei",
@@ -35,6 +37,23 @@
     /* background-color: #f3f3f5;  */
     letter-spacing: .1px;
     }
+    
+    .left-panel::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0),
+        rgba(0,0,0,0.06),
+        rgba(0,0,0,0)
+    );
+    pointer-events: none;
+    }
+
     .left-panel p {
     color: #505050;
     }
@@ -150,21 +169,38 @@
     
     /* --- PROJECT DETAILS & BUTTON STYLES --- */
     .details-btn {
-        background-color: rgb(0, 120, 171);
-        color: white;
+        background: none;
         border: none;
-        padding: 5px 12px;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 0.9em;
-        font-weight: 600;
-        transition: background-color 0.3s, transform 0.2s;
+        padding: 0;
         margin-left: 8px;
+
+        font-size: 0.95em;
+        font-weight: 500;
+        color: #2f6ed6;
+
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+
+        transition: color 0.2s ease;
     }
+
     .details-btn:hover {
-        background-color: rgb(0, 120, 171);
-        transform: translateY(-1px);
+        color: #1f4fbf;
+        text-decoration: underline;
     }
+
+    .details-arrow {
+        display: inline-block;
+        font-size: 1em;
+        transition: transform 0.2s ease;
+    }
+
+    .details-btn:hover .details-arrow {
+        transform: translateX(3px);
+    }
+
     .project-details {
         max-height: 0;
         border-bottom: 2px solid rgb(0, 120, 171);
@@ -408,6 +444,7 @@
         /* No new rules are needed here. */
     }
   </style>
+  <link rel="stylesheet" href="details.css">
 </head>
 <body>
 
@@ -434,6 +471,8 @@
     </aside>
 
     <main class="right-panel">
+        <div id="section-indicator"></div>
+
         <div class="section">
             <h2>Technical Skills</h2>
             <ul>
@@ -442,14 +481,19 @@
               <li><strong>ML Techniques:</strong> GBDT, Temporal CNN, DeBERTa, U-Net, PINN, CRF, Domain Adaptation, Reinforcement Learning, Feature Engineering, Optimization (SGD, Adam, etc.)</li>
             </ul>
         </div>
-        
+
         <div class="section">
             <h2>Featured Projects</h2>
             <ul>
               <li>
                 <strong>Slum Detection via CNN (Jointly Hosted by MIT Sloan, UC Berkeley Haas)</strong>
                 <span> — Presented at MIT–Berkeley Joint Workshop 2025. </span>
-                <strong><a href="https://github.com/Lauristt/slumworld" target="_blank">Github</a></strong> – Led a 5-person RA team in developing attention-augmented UNet pipelines on 100k+ labels, incorporating CRFs, domain adaptation, and data augmentation. Achieved a <strong>25% F1-score uplift </strong>via training set optimization. Mentored under MIT Sloan and Cornell GSAS faculty.<button class="details-btn" data-target="#slum-details">View Details</button>
+                <strong><a href="https://github.com/Lauristt/slumworld" target="_blank">Github</a></strong> – Led a 5-person RA team in developing attention-augmented UNet pipelines on 100k+ labels, incorporating CRFs, domain adaptation, and data augmentation. Achieved a <strong>25% F1-score uplift </strong>via training set optimization. Mentored under MIT Sloan and Cornell GSAS faculty.
+                <button class="details-btn" data-target="#slum-details">
+                <span class="details-text">Explore Further</span>
+                <span class="details-arrow">→</span>
+                </button>
+
                 
                 <div id="slum-details" class="project-details">
                   <h3>Project Details: Slum Detection with Attention U-Net v2</h3>
@@ -462,27 +506,18 @@
 
                 <figcaption class="figcaption-burkina">
                 <strong>Selective Decoder Integration (SDI) — Architecture Overview</strong><br>
-                The SDI module aggregates encoder features across scales and selectively routes
-                information into decoder stages for domain-adaptive feature fusion.
                 </figcaption>
             </figure>
+            <p>The SDI module aggregates encoder features across scales and selectively routes information into decoder stages for domain-adaptive feature fusion.</p>
 
             <figure class="small-figure sdi-spaced-figure">
                 <img src="sdi_internal_module.png" class="Burkina-image">
 
                 <figcaption class="figcaption-burkina">
                 <strong>SDI Internal Block Design</strong><br>
-                Spatial-channel attention with multi-scale down/upsampling and smoothing layers
-                supports robust cross-domain adaptation.
                 </figcaption>
             </figure>
-
-            <div class="sdi-reference">
-                Adapted from the SDI architecture originally proposed for medical image segmentation  
-                (<a href="https://arxiv.org/pdf/2311.17791" target="_blank">Xiong et al., 2023</a>).  
-                In this work, I extend SDI to the satellite-imagery domain and demonstrate its effectiveness
-                under cross-region domain shift.
-            </div>
+            <p>Spatial-channel attention with multi-scale down/upsampling and smoothing layers supports robust cross-domain adaptation. (Adapted from the SDI architecture originally proposed for medical image segmentation (<a href="https://arxiv.org/pdf/2311.17791" target="_blank">Xiong et al., 2023</a>). In this work, I extend SDI to the satellite-imagery domain and demonstrate its effectiveness under cross-region domain shift.)</p>
 
         </div>
 
@@ -583,7 +618,12 @@
               </li>
               <li>
                 <strong>Dupire-PINN Option Pricing (HKU Business School)</strong>
-                <strong><a href="https://github.com/Lauristt/pinn_with_localvol_calculation" target="_blank">Github</a></strong> – Developed a Physics-Informed Neural Network (PINN) framework for European SPX option pricing, embedding the Black–Scholes PDE as a physics constraint. Integrated residual connections (ResNet blocks) and adaptive loss-weighting to stabilize training and accelerate convergence. Fine-tuned the trained model with a Dupire local volatility calibration, using RBF-interpolated volatility surfaces to capture skew and smile effects. Achieved a <strong>36% MSE reduction versus BSM </strong>and improved stability in volatile regimes, providing a scalable architecture for derivative pricing under local volatility dynamics.<button class="details-btn" data-target="#pinn-details">View Details</button>
+                <strong><a href="https://github.com/Lauristt/pinn_with_localvol_calculation" target="_blank">Github</a></strong> – Developed a Physics-Informed Neural Network (PINN) framework for European SPX option pricing, embedding the Black–Scholes PDE as a physics constraint. Integrated residual connections (ResNet blocks) and adaptive loss-weighting to stabilize training and accelerate convergence. Fine-tuned the trained model with a Dupire local volatility calibration, using RBF-interpolated volatility surfaces to capture skew and smile effects. Achieved a <strong>36% MSE reduction versus BSM </strong>and improved stability in volatile regimes, providing a scalable architecture for derivative pricing under local volatility dynamics.
+                <button class="details-btn" data-target="#pinn-details">
+                <span class="details-text">Explore Further</span>
+                <span class="details-arrow">→</span>
+                </button>
+
                 <div id="pinn-details" class="project-details">
                   <h3>Project Details: Dupire-PINN Option Pricing</h3>
                   <h4>Theoretical Framework</h4>
@@ -668,9 +708,9 @@
         <div class="section">
             <h2>Professional Experience</h2>
             <ul>
-              <li><strong>Qube Research & Technologies(QRT), Quantitative Developer Intern</strong> – 2026 summer.</li>
+              <li><strong>Qube Research & Technologies(QRT), Quantitative Developer Intern</strong> – Systematic Macro Team, 2026 summer.</li>
               <li><strong>Neuberger Berman, Quantitative Researcher - University of Chicago Project Lab</strong> – Developed systematic machine-learning and regression models to assess global bond-market relative value and built automated Linux-based pipelines for macro and real-time bond data analysis.</li>
-              <li><strong>Huatai-PineBridge Fund, Quantitative Researcher Intern</strong> – Engineered high-frequency trading signals for government bond futures using Temporal CNNs, achieving 63% hit ratio. Replaced cross-entropy with focal loss, increasing pixel-level accuracy by 12% and F1-score by 0.14. Developed drawdown-controlled allocation strategies, maintaining Sharpe ratio > 1.5 under Q2 2024 volatility.</li>
+              <li><strong>Huatai-PineBridge Fund, Quantitative Researcher Intern</strong> – Government Bond Futures Strategy. (Detailes NDA). </li>
               <li><strong>Guotai Haitong (Jun'an) Securities, Quantitative Researcher Intern</strong> – Designed and backtested 3 factor-based alpha strategies on treasury bond futures, each with Sharpe ratio > 2.0. Built cluster-enhanced residual regression models to forecast fund duration, improving accuracy by 18%. Authored fixed-income hedge report reducing strategy drawdown by 8% (Q4 2022–Q1 2024).</li>
             </ul>
         </div>
@@ -679,7 +719,7 @@
             <h2>Education</h2>
             <ul>
               <li><strong>The University of Chicago</strong> – M.S. in Financial Mathematics, Expected December 2026</li>
-              <li><strong>Shanghai University of Finance and Economics</strong> – B.S. in Financial Mathematics, June 2025</li>
+              <li><strong>Shanghai University of Finance and Economics</strong> – Bachelor's Degree, Finance and Applied Mathematics (Double Major), June 2025</li>
               <li><strong>University of California, Berkeley</strong> – Visiting Student in Applied Mathematics, December 2023</li>
             </ul>
         </div>
@@ -688,7 +728,7 @@
             <h2>Languages & Interests</h2>
             <ul>
                 <li>Mandarin (native), Japanese (basic), Spanish (basic)</li>
-                <li>Rock climbing, Hiking, Swimming, Volunteer work</li>
+                <li>Rock climbing, Hiking, Piano, Volunteer work</li>
             </ul>
         </div>
     </main>
@@ -706,8 +746,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
             if (detailsPanel) {
                 const isShown = detailsPanel.classList.toggle('show');
-                const btnText = isShown ? 'Hide Details' : 'View Details';
-                this.textContent = btnText;
+                const textSpan = this.querySelector('.details-text');
+                const arrowSpan = this.querySelector('.details-arrow');
+
+                if (textSpan) {
+                    textSpan.textContent = isShown ? 'Hide Details' : 'Explore Further';
+                }
+
+                if (arrowSpan) {
+                    arrowSpan.textContent = '→';
+                }
+
 
                 let foldBtn = detailsPanel.querySelector('.fold-details-btn');
                 if (isShown && !foldBtn) {
@@ -716,8 +765,18 @@ document.addEventListener('DOMContentLoaded', function () {
                     foldBtn.textContent = 'Fold Details';
                     foldBtn.addEventListener('click', function() {
                         detailsPanel.classList.remove('show');
-                        btn.textContent = 'View Details';
+
+                        const textSpan = btn.querySelector('.details-text');
+                        const arrowSpan = btn.querySelector('.details-arrow');
+
+                        if (textSpan) {
+                            textSpan.textContent = 'Explore Further';
+                        }
+                        if (arrowSpan) {
+                            arrowSpan.textContent = '→';
+                        }
                     });
+
                     detailsPanel.appendChild(foldBtn);
                 } else if (!isShown && foldBtn) {
                 }
@@ -725,6 +784,37 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+const indicator = document.getElementById('section-indicator');
+const sections = document.querySelectorAll('.right-panel .section');
+
+window.addEventListener('scroll', () => {
+    let current = null;
+
+    sections.forEach(section => {
+        const h2 = section.querySelector('h2');
+        if (!h2) return;
+
+        const sectionTop = section.offsetTop;
+        const sectionBottom = sectionTop + section.offsetHeight;
+        const scrollY = window.scrollY + 10;
+
+        if (scrollY >= sectionTop && scrollY < sectionBottom) {
+            const h2Top = h2.offsetTop;
+            if (scrollY > h2Top + 20) {
+                current = h2.textContent;
+            }
+        }
+    });
+
+    if (current) {
+        indicator.textContent = current;
+        indicator.style.opacity = '1';
+    } else {
+        indicator.style.opacity = '0';
+    }
+});
+
+
 
 </script>
 
