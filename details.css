@@ -1,6 +1,6 @@
 /* details.css */
 .details-btn {
-    background-color: #007bff;
+    background-color: rgb(47, 179, 234);
     color: white;
     border: none;
     padding: 5px 10px;
@@ -10,7 +10,7 @@
     transition: background-color 0.3s;
 }
 .details-btn:hover {
-    background-color: #0056b3;
+    background-color: rgb(47, 179, 234);
 }
 
 /* Downsample / Upsample 小字样式 */
@@ -55,7 +55,7 @@
 .project-details h3 {
     color: #1a1a1a;
     margin-top: 0;
-    border-bottom: 2px solid #007bff;
+    border-bottom: 2px solid rgb(47, 179, 234);
     padding-bottom: 10px;
 }
 
@@ -166,29 +166,29 @@ pre {
 
 
 .Burkina-container {
-    text-align: center; /* 图片和注释居中 */
+    text-align: center; 
     margin: 20px auto;
   }
   
   .Burkina-image {
-    display: block; /* 1. 将图片设置为块级元素 */
+    display: block;
     max-width: 100%;
     height: auto;
     border-radius: 8px;
-    margin: 15px auto; /* 2. 上下边距15px，左右自动 */
+    margin: 15px auto; 
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
   
-  .Burkina-container figcaption {
+  /* .Burkina-container figcaption {
     font-size: 0.9em;
     color: #555;
     margin-top: 8px;
-    font-style: italic; /* 注释斜体 */
-  }
+    font-style: italic; 
+  } */
   
 
   .PINN-container {
-    text-align: center; /* 图片和注释居中 */
+    text-align: center; 
     margin: 20px auto;
   }
   
@@ -196,14 +196,14 @@ pre {
     width: 800px;
     height: auto;
     display: block;
-    margin: 0 auto; /* 水平居中 */
+    margin: 0 auto; 
   }
   
   .PINN-container figcaption {
     font-size: 0.9em;
     color: #555;
     margin-top: 8px;
-    font-style: italic; /* 注释斜体 */
+    font-style: italic; 
   }
   
 
@@ -215,17 +215,17 @@ pre {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 统一字体 */
 }
 .architecture-diagram h4 {
-    font-size: 1.3em; /* 增大标题字号 */
+    font-size: 1.3em; 
     font-weight: 600;
-    color: #2c3e50; /* 使用更柔和的深色 */
-    margin-bottom: 30px; /* 增加标题和图表间距 */
+    color: #2c3e50; 
+    margin-bottom: 30px; 
 }
 .unet-flex-container { 
     display: flex; 
     justify-content: center; 
-    align-items: center; /* 垂直居中对齐 */
+    align-items: center; 
     flex-wrap: wrap; 
-    gap: 15px; /* 增加元素间距 */
+    gap: 15px; 
 }
 .unet-path { 
     display: flex; 
@@ -234,14 +234,14 @@ pre {
     padding: 0 10px; 
 }
 .unet-box { 
-    border-radius: 8px; /* 增加圆角 */
+    border-radius: 8px; 
     padding: 12px 18px; 
     margin: 5px 0; 
-    min-width: 160px; /* 增加最小宽度 */
-    font-size: 14px; /* 增大方框内字体 */
+    min-width: 160px; 
+    font-size: 14px; 
     font-weight: 500;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.08); /* 优化阴影效果 */
-    border: 1px solid transparent; /* 预设透明边框 */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08); 
+    border: 1px solid transparent; 
     transition: all 0.3s ease;
 }
 .unet-box:hover {
@@ -251,22 +251,22 @@ pre {
 .unet-box.encoder { background-color: #eaf6ff; border-color: #bde0fe; }
 .unet-box.decoder { background-color: #fff0f6; border-color: #ffd6e7; }
 .unet-box small { 
-    color: #555; /* 调整小字颜色 */
-    font-style: normal; /* 取消斜体，更清晰 */
+    color: #555; 
+    font-style: normal; 
     font-size: 12px;
     font-weight: 400;
 }
 .sdi-module-large { 
-    background-color: #34495e; /* 更深的背景色 */
+    background-color: #34495e; 
     color: white; 
-    font-weight: 600; /* 调整字重 */
+    font-weight: 600; 
     writing-mode: vertical-rl; 
     text-orientation: mixed; 
     padding: 20px 15px; 
-    border-radius: 10px; /* 增加圆角 */
+    border-radius: 10px; 
     font-size: 2.8em; 
-    letter-spacing: 6px; /* 调整字母间距 */
-    height: 280px; /* 增加高度 */
+    letter-spacing: 6px; 
+    height: 280px; 
     display: flex; 
     align-items: center; 
     justify-content: center; 
@@ -280,18 +280,18 @@ pre {
     margin: 0 8px; 
 }
 .sdi-input-arrow, .sdi-output-arrow { 
-    font-size: 1.8em; /* 增大箭头 */
+    font-size: 1.8em; 
     color: #777; 
 }
 .arrow { 
-    font-size: 28px; /* 增大箭头 */
+    font-size: 28px; 
     color: #999; 
     margin: 6px 0; 
 }
 .skip-connection { 
-    font-style: normal; /* 取消斜体 */
-    color: #444; /* 调整颜色 */
-    font-size: 14px; /* 增大字号 */
+    font-style: normal; 
+    color: #444; 
+    font-size: 14px; 
     margin-top: 20px;
     max-width: 600px;
     margin-left: auto;
@@ -306,7 +306,7 @@ pre {
 .Burkina-image {
     display: block;
     max-width: 100%;
-    max-height: 300px; /* 设置最大高度，您可以根据需要调整 */
+    max-height: 300px; 
     height: auto;
     border-radius: 8px;
     margin: 15px auto;
@@ -344,5 +344,14 @@ pre {
 .fold-details-btn:hover {
     background-color: #545b62;
     transform: translateY(-1px);
+}
+
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  letter-spacing: .2px;
+}
+
+h1, h2, h3 {
+  font-family: "Playfair Display", Georgia, serif;
 }
 
