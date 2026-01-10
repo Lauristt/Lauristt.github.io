@@ -498,7 +498,34 @@
                 <div id="slum-details" class="project-details">
                   <h3>Project Details: Slum Detection with DINO Series, SAM Series and Vanilla-UNet</h3>
                   <div class="architecture-diagram">
-                    <h4>Selected Integration: Attention U-Net v2 Architecture Overview</h4>
+                    <h4>Selected Architecture I: SDI-Enhanced ViT with Frozen DINOv3 Features</h4>
+                        <div class="sdi-section">
+                            <figure class="small-figure">
+                                <img src="dino_model.png" class="Burkina-image">
+                                <figcaption class="figcaption-burkina">
+                                <strong>Model Overview – Main Trainable Branch with Auxiliary Frozen DINOv3 Features</strong><br>
+                                </figcaption>
+                            </figure>
+                            <p>
+                            We design a ViT-based segmentation architecture augmented with stacked SDI blocks for semantic enhancement.
+                            In parallel, we incorporate frozen DINOv3 features as an auxiliary semantic signal, which are upsampled and
+                            fused at the decoder stage. This design decouples task-specific representation learning from pretrained
+                            multimodal priors, allowing the model to leverage high-level semantics while maintaining training stability.
+                            </p>
+                        </div>
+
+                    <h4>Selected Architecture II: Nano-Banana Inference Results & Vanilla U-Net</h4>
+                        <div class="sdi-section">
+                        <figure class="small-figure">
+                            <img src="Nano_banana_results_selected.png" class="Burkina-image">
+                            <figcaption class="figcaption-burkina">
+                            <strong>Selective Inference Results - Nano-Banana Compared to Vanilla U-Net Series</strong><br>
+                            </figcaption>
+                        </figure>
+                        <p>We incorporated Nano-Banana (Google DeepMind) into our informal settlement segmentation pipeline. The inference results highlight the promise of AI-oriented model families, with pretrained multimodal LLM–vision models demonstrating strong potential in both precision and segmentation granularity.  </p>
+                        </div>
+
+                    <h4>Selected Architecture III: Attention U-Net v2 Architecture Overview</h4>
             <div class="sdi-section">
 
             <figure class="small-figure">
@@ -541,6 +568,7 @@
 <span class="code-keyword">class</span> <span class="code-class">ChannelAttention</span>(nn.Module):
     <span class="code-keyword">def</span> <span class="code-def">__init__</span>(<span class="code-keyword">self</span>, in_planes, ratio=16):
         <span class="code-keyword">super</span>().__init__()
+        <span class="code-comment"># Average and Maximal Attention-based Transform: (B,C,H,W) -> (B,C,*)</span>
         <span class="code-keyword">self</span>.avg_pool = nn.AdaptiveAvgPool2d(1)
         <span class="code-keyword">self</span>.max_pool = nn.AdaptiveMaxPool2d(1)
         <span class="code-keyword">self</span>.fc = nn.Sequential(
@@ -728,7 +756,7 @@
             <h2>Languages & Interests</h2>
             <ul>
                 <li>Mandarin (native), Japanese (basic), Spanish (basic)</li>
-                <li>Rock climbing, Hiking, Piano, Volunteer work</li>
+                <li>Hiking, Piano, Marathon, Diving, Volunteer work</li>
             </ul>
         </div>
     </main>
