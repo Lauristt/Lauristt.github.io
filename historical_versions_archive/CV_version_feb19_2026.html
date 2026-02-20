@@ -166,25 +166,8 @@
       box-shadow: 0 0 12px rgba(0,0,0,0.15);
       border: 3px solid white;
     }
-    .section {
-    margin-bottom: 40px;
-    }
-
-    .section + .section {
-        margin-top: 20px;
-    }
-
-
-    /* project_details */
-    .section:last-of-type {
-    margin-bottom: 0;
-    }
-
-    .project-card:last-child {
-        margin-bottom: 0;
-        padding-bottom: 0;
-    }
-
+    
+    /* --- PROJECT DETAILS & BUTTON STYLES --- */
     .details-btn {
         background: none;
         border: none;
@@ -219,34 +202,29 @@
     }
 
     .project-details {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.7s ease-in-out;
-    border: none;
-    margin-top: 0;
-    padding: 0;
-    background: transparent;
-    box-shadow: none;
-    border-radius: 0;
-    }    
-       
-    .project-details.show {
-    max-height: 8000px;
-    transition: max-height 1.2s ease-in-out;
-    margin-top: 15px;
-    padding: 25px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    border: 1px solid #e0e0e0;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        max-height: 0;
+        border-bottom: 2px solid rgb(0, 120, 171);
+        overflow: hidden;
+        transition: max-height 0.7s ease-in-out;
+        background-color: #ffffff;
+        border-radius: 8px;
+        margin-top: 15px;
+        padding: 0 25px;
+        border: 1px solid #e0e0e0;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05
+        );
     }
-
+    .project-details.show {
+        max-height: 8000px; /* Increased max-height for potentially longer content */
+        padding: 25px;
+        transition: max-height 1.2s ease-in-out;
+    }
     .project-details h3 {
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         font-weight: 600;
         color: #1a1a1a;
         margin-top: 0;
-        /* border-bottom: 2px solid rgb(0, 120, 171); */
+        border-bottom: 2px solid rgb(0, 120, 171);
         padding-bottom: 10px;
     }
     .project-details h4 {
@@ -346,18 +324,9 @@
     text-decoration: underline;
     }
     .project-card {
-    margin-bottom: 24px;
-    padding-bottom: 24px;
-    border-bottom: none;
-    }
-
-    .project-card:last-child {
-        border-bottom: none;
-    }
-    .project-card:last-child .project-meta {
-    border-bottom: none;
-    }
-
+    margin-bottom: 50px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #e6e6e6;}
 
     .project-header h3 {
         margin-bottom: 4px;
@@ -375,10 +344,8 @@
     }
 
     .project-meta {
-    font-size: 0.9rem;
-    color: #666;
-    padding-bottom: 18px;
-    border-bottom: 1px solid #e3e3e3;
+        font-size: 0.9rem;
+        color: #666;
     }
 
 
@@ -542,27 +509,16 @@
 
         <div class="section">
             <h2>Featured Projects</h2>
-              <div class="project-card">
-                  <div class="project-header">
-                        <h3>Slum Detection via Computer Vision</h3>
-                        <div class="project-publication">
-                            <em>Journal of Economic Perspectives</em>, Forthcoming (2026)
-                        </div>
-                    </div>
-                <div class="project-description">
-                        Led a 5-person Graduate RA team developing attention-augmented UNet pipelines 
-                        on 100k+ labels. Integrated Pre-training processing, Post-training finetuning and domain adaptation. 
-                        Achieved a <strong>25% F1-score uplift</strong>.
-                    </div>
-                  <div class="project-meta">
-                        MIT Sloan · UC Berkeley Haas · 
-                        <a href="https://github.com/Lauristt/slumworld">GitHub</a> · 
-                        <button class="details-btn" data-target="#slum-details">
-                            <span class="details-text">Explore Further</span>
-                            <span class="details-arrow">→</span>
-                        </button>
-                    </div>
-                
+            <ul>
+              <li>
+                <strong>Slum Detection via Computer Vision</strong>
+                <span> (Jointly Hosted by MIT Sloan & UC Berkeley Haas) </span><br>
+                <span> — <em>Journal of Economic Perspectives</em>, Forthcoming (2026). </span>
+                <strong><a href="https://github.com/Lauristt/slumworld" target="_blank">Github</a></strong> – Led a 5-person RA team in developing attention-augmented UNet pipelines on 100k+ labels, incorporating CRFs, domain adaptation, and data augmentation. Achieved a <strong>25% F1-score uplift </strong>via training set optimization. Mentored under MIT Sloan and Cornell GSAS faculty.
+                <button class="details-btn" data-target="#slum-details">
+                <span class="details-text">Explore Further</span>
+                <span class="details-arrow">→</span>
+                </button>
 
                 
                 <div id="slum-details" class="project-details">
@@ -713,29 +669,14 @@
                       </details>
                   </div>
                 </div>
-              </div>
-
-                 <div class="project-card">
-                  <div class="project-header">
-                        <h3>Dupire-PINN Option Pricing</h3>
-                        <div class="project-publication">
-                            <em>IEEE Transactions on Pattern Analysis and Machine Intelligence</em>, 2025
-                        </div>
-                    </div>
-                <div class="project-description">
-                        This project leverages Physics-Informed Neural Networks (PINNs) to solve the Dupire 
-                        equation for local volatility. By embedding the Partial Differential Equation (PDE) directly into the loss 
-                        function, the model learns solutions that are empirically more precise and robust than traditional tools.
-                    </div>
-                  <div class="project-meta">
-                        HKU Business School
-                        <a href="https://github.com/Lauristt/pinn_with_localvol_calculation">· GitHub</a> · 
-                        <button class="details-btn" data-target="#pinn-details">
-                            <span class="details-text">Explore Further</span>
-                            <span class="details-arrow">→</span>
-                        </button>
-                    </div>
-                
+              </li>
+              <li>
+                <strong>Dupire-PINN Option Pricing (HKU Business School)</strong>
+                <strong><a href="https://github.com/Lauristt/pinn_with_localvol_calculation" target="_blank">Github</a></strong> – Developed a Physics-Informed Neural Network (PINN) framework for European SPX option pricing, embedding the Black–Scholes PDE as a physics constraint. Integrated residual connections (ResNet blocks) and adaptive loss-weighting to stabilize training and accelerate convergence. Fine-tuned the trained model with a Dupire local volatility calibration, using RBF-interpolated volatility surfaces to capture skew and smile effects. Achieved a <strong>36% MSE reduction versus BSM </strong>and improved stability in volatile regimes, providing a scalable architecture for derivative pricing under local volatility dynamics.
+                <button class="details-btn" data-target="#pinn-details">
+                <span class="details-text">Explore Further</span>
+                <span class="details-arrow">→</span>
+                </button>
 
                 <div id="pinn-details" class="project-details">
                   <h3>Project Details: Dupire-PINN Option Pricing</h3>
@@ -795,48 +736,20 @@
                       </details>
                   </div>
                 </div>
-              </div>
-
-                <div class="project-card">
-                  <div class="project-header">
-                        <h3>Financial Sentiment Analysis</h3>
-                    </div>
-                <div class="project-description">
-                        Constructed a full NLP pipeline with custom sentiment scoring for Chinese equity research reports. 
-                        Automated data scraping (Eastmoney), risk-word filtering, and scoring dictionary optimization for signal extraction.
-                    </div>
-                  <div class="project-meta">
-                        Shanghai University of Finance and Economics
-                        · <a href="https://github.com/Lauristt/Financial-Sentiment-Analysis">GitHub</a>
-                    </div>
-                    </div>
-                
-                <div class="project-card">
-                  <div class="project-header">
-                        <h3>Kaggle AES Scoring (Silver Medal)</h3>
-                    </div>
-                <div class="project-description">
-                        Built hybrid DeBERTa-v3 + GBDT model with handcrafted NLP features and designed a QWK-focused optimizer. Implemented custom penalty weighting and threshold tuning to directly maximize leaderboard metric.
-                    </div>
-                  <div class="project-meta">
-                        Shanghai University of Finance and Economics
-                        · <a href="https://github.com/Lauristt/kaggle_aesScore_solution">GitHub</a>
-                    </div>
-                    </div>
-
-                <div class="project-card">
-                  <div class="project-header">
-                        <h3>Kaggle DRW Crypto Prediction (Silver Medal)</h3>
-                    </div>
-                <div class="project-description">
-                       Designed crypto price forecasting pipeline with microstructure-aware features (Garman-Klass volatility, order flow, and rolling momentum). Combined lagged regression with multi-horizon modeling. Achieved <strong>0.14 Correlation (market signal)</strong> with over 500,000 hourly level data points.
-                    </div>
-                  <div class="project-meta">
-                        The University of Chicago
-                         · <a href="https://github.com/Lauristt/kaggle_drw_prediction_challenge">GitHub</a>
-                    </div>
-                    </div>
-                
+              </li>
+              <li>
+                <strong>Financial Sentiment Analysis</strong>
+                <strong><a href="https://github.com/Lauristt/Financial-Sentiment-Analysis" target="_blank">Github</a></strong> – Constructed a full NLP pipeline with custom sentiment scoring for Chinese equity research reports. Automated data scraping (Eastmoney), risk-word filtering, and scoring dictionary optimization for signal extraction.
+              </li>
+              <li>
+                <strong>Kaggle AES Scoring (Silver Medal)</strong>
+                <strong><a href="https://github.com/Lauristt/kaggle_aesScore_solution" target="_blank">Github</a></strong> – Silver Medal: Built hybrid DeBERTa-v3 + GBDT model with handcrafted NLP features and designed a QWK-focused optimizer. Implemented custom penalty weighting and threshold tuning to directly maximize leaderboard metric.
+              </li>
+              <li>
+                <strong>Kaggle DRW Crypto Prediction (Silver Medal, to be updated soon)</strong>
+                <strong><a href="https://github.com/Lauristt/kaggle_drw_prediction_challenge" target="_blank">Kaggle</a></strong> – Silver Medal: Designed crypto price forecasting pipeline with microstructure-aware features (Garman-Klass volatility, order flow, and rolling momentum). Combined lagged regression with multi-horizon modeling. Achieved <strong>0.14 Correlation (market signal)</strong> with over 500,000 hourly level data points.
+              </li>
+            </ul>
         </div>
         
         <div class="section">
