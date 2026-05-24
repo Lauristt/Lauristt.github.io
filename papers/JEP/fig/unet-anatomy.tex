@@ -1,0 +1,143 @@
+% U-Net anatomy figure for Section 4.
+% Five grids in a row: input tile, encoder mid feature map, low-resolution
+% bottleneck summary, decoder mid feature map, slum-probability output.
+% The encoder compresses left-to-right; the decoder expands left-to-right.
+% Dashed orange arcs show skip connections from each encoder grid to its
+% matching-resolution decoder grid.
+% The input grid reuses panchromatic values from
+% analysis/output/metrics-diagram-pan-values.tex so the same example image
+% carries across Figures 4, 5, and this figure.
+\begin{tikzpicture}[
+    every node/.style={font=\footnotesize},
+]
+    % ---- Grid geometry ----
+    \def\Nhi{11}
+    \def\Nmd{5}
+    \def\Nlo{2}
+    \def\Lhi{0.22}
+    \def\Lmd{0.40}
+    \def\Llo{0.70}
+    \pgfmathsetmacro{\Whi}{\Nhi*\Lhi/2}
+    \pgfmathsetmacro{\Wmd}{\Nmd*\Lmd/2}
+    \pgfmathsetmacro{\Wlo}{\Nlo*\Llo/2}
+
+    % ---- Column centers ----
+    \def\xIn{-6}
+    \def\xEM{-3}
+    \def\xBot{0}
+    \def\xDM{3}
+    \def\xOut{6}
+
+    % ---- Input grid (11x11), filled with PAN values ----
+    \begin{scope}[shift={(\xIn, 0)}]
+        \def\panvalue#1#2#3{%
+            \pgfmathsetmacro{\axa}{(#1-1-\Nhi/2)*\Lhi}%
+            \pgfmathsetmacro{\axb}{(#1-\Nhi/2)*\Lhi}%
+            \pgfmathsetmacro{\aya}{(#2-1-\Nhi/2)*\Lhi}%
+            \pgfmathsetmacro{\ayb}{(#2-\Nhi/2)*\Lhi}%
+            \filldraw[draw=black!50, line width=0.15pt, fill=white!#3!black]
+                (\axa,\aya) rectangle (\axb,\ayb);%
+        }
+        \input{analysis/output/metrics-diagram-pan-values.tex}
+    \end{scope}
+
+    % ---- Encoder mid grid (5x5) ----
+    \begin{scope}[shift={(\xEM, 0)}]
+        \foreach \i in {1,...,\Nmd} {
+            \foreach \j in {1,...,\Nmd} {
+                \pgfmathsetmacro{\axa}{(\i-1-\Nmd/2)*\Lmd}
+                \pgfmathsetmacro{\axb}{(\i-\Nmd/2)*\Lmd}
+                \pgfmathsetmacro{\aya}{(\j-1-\Nmd/2)*\Lmd}
+                \pgfmathsetmacro{\ayb}{(\j-\Nmd/2)*\Lmd}
+                \filldraw[draw=black!55, line width=0.2pt, fill=white]
+                    (\axa,\aya) rectangle (\axb,\ayb);
+            }
+        }
+    \end{scope}
+
+    % ---- Bottleneck (2x2) ----
+    \begin{scope}[shift={(\xBot, 0)}]
+        \foreach \i in {1,...,\Nlo} {
+            \foreach \j in {1,...,\Nlo} {
+                \pgfmathsetmacro{\axa}{(\i-1-\Nlo/2)*\Llo}
+                \pgfmathsetmacro{\axb}{(\i-\Nlo/2)*\Llo}
+                \pgfmathsetmacro{\aya}{(\j-1-\Nlo/2)*\Llo}
+                \pgfmathsetmacro{\ayb}{(\j-\Nlo/2)*\Llo}
+                \filldraw[draw=black!55, line width=0.2pt, fill=white]
+                    (\axa,\aya) rectangle (\axb,\ayb);
+            }
+        }
+    \end{scope}
+
+    % ---- Decoder mid grid (5x5) ----
+    \begin{scope}[shift={(\xDM, 0)}]
+        \foreach \i in {1,...,\Nmd} {
+            \foreach \j in {1,...,\Nmd} {
+                \pgfmathsetmacro{\axa}{(\i-1-\Nmd/2)*\Lmd}
+                \pgfmathsetmacro{\axb}{(\i-\Nmd/2)*\Lmd}
+                \pgfmathsetmacro{\aya}{(\j-1-\Nmd/2)*\Lmd}
+                \pgfmathsetmacro{\ayb}{(\j-\Nmd/2)*\Lmd}
+                \filldraw[draw=black!55, line width=0.2pt, fill=white]
+                    (\axa,\aya) rectangle (\axb,\ayb);
+            }
+        }
+    \end{scope}
+
+    % ---- Output grid (11x11), synthetic slum-probability shading ----
+    % High-probability blob centered near (7, 5.5), matching the predicted
+    % slum cluster from Figure 4 (cluster A in metrics-diagram.qmd).
+    \begin{scope}[shift={(\xOut, 0)}]
+        \foreach \i in {1,...,\Nhi} {
+            \foreach \j in {1,...,\Nhi} {
+                \pgfmathsetmacro{\axa}{(\i-1-\Nhi/2)*\Lhi}
+                \pgfmathsetmacro{\axb}{(\i-\Nhi/2)*\Lhi}
+                \pgfmathsetmacro{\aya}{(\j-1-\Nhi/2)*\Lhi}
+                \pgfmathsetmacro{\ayb}{(\j-\Nhi/2)*\Lhi}
+                \pgfmathsetmacro{\d}{sqrt((\i-7)*(\i-7) + (\j-5.5)*(\j-5.5))}
+                \pgfmathtruncatemacro{\prob}{round(max(0, 80 - 22*\d))}
+                \filldraw[draw=black!50, line width=0.15pt, fill=red!\prob!white]
+                    (\axa,\aya) rectangle (\axb,\ayb);
+            }
+        }
+    \end{scope}
+
+    % ---- Anchor coordinates at picture level ----
+    \coordinate (in-R)  at (\xIn + \Whi, 0);
+    \coordinate (in-T)  at (\xIn, \Whi);
+    \coordinate (em-L)  at (\xEM - \Wmd, 0);
+    \coordinate (em-R)  at (\xEM + \Wmd, 0);
+    \coordinate (em-T)  at (\xEM, \Wmd);
+    \coordinate (bot-L) at (\xBot - \Wlo, 0);
+    \coordinate (bot-R) at (\xBot + \Wlo, 0);
+    \coordinate (dm-L)  at (\xDM - \Wmd, 0);
+    \coordinate (dm-R)  at (\xDM + \Wmd, 0);
+    \coordinate (dm-T)  at (\xDM, \Wmd);
+    \coordinate (out-L) at (\xOut - \Whi, 0);
+    \coordinate (out-T) at (\xOut, \Whi);
+
+    % ---- Compression arrows (encoder, horizontal right) ----
+    \draw[->, line width=0.8pt, black!70]
+        (in-R) -- node[above, font=\scriptsize, black!75]{compress} (em-L);
+    \draw[->, line width=0.8pt, black!70]
+        (em-R) -- node[above, font=\scriptsize, black!75]{compress} (bot-L);
+
+    % ---- Expansion arrows (decoder, horizontal right) ----
+    \draw[->, line width=0.8pt, black!70]
+        (bot-R) -- node[above, font=\scriptsize, black!75]{expand} (dm-L);
+    \draw[->, line width=0.8pt, black!70]
+        (dm-R) -- node[above, font=\scriptsize, black!75]{expand} (out-L);
+
+    % ---- Skip-connection arcs ----
+    \draw[->, line width=0.9pt, orange!85!black, dashed]
+        (in-T) .. controls (\xIn, 2.6) and (\xOut, 2.6) .. (out-T);
+    \draw[->, line width=0.9pt, orange!85!black, dashed]
+        (em-T) .. controls (\xEM, 1.6) and (\xDM, 1.6) .. (dm-T);
+    \node[font=\scriptsize, orange!85!black] at (0, 2.85) {skip connection};
+    \node[font=\scriptsize, orange!85!black] at (0, 1.85) {skip connection};
+
+    % ---- Labels below grids ----
+    \node[anchor=north] at (\xIn,  -\Whi - 0.15) {Input tile};
+    \node[anchor=north, align=center] at (\xBot, -\Wlo - 0.15) {Low-resolution\\summary};
+    \node[anchor=north, align=center] at (\xOut, -\Whi - 0.15) {Slum-probability\\output};
+
+\end{tikzpicture}

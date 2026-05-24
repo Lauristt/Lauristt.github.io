@@ -1,0 +1,87 @@
+% Receptive-field figure: two stacked 3x3 conv layers on the 11x11 toy grid.
+% Bottom (input) cells are filled with PAN values from
+% analysis/output/metrics-diagram-pan-values.tex.
+\begin{tikzpicture}[
+    every node/.style={font=\footnotesize},
+    x=0.50cm, y=0.50cm,
+]
+    \def\skewx{0.45}
+    \def\skewy{0.40}
+    \def\layersep{6.5}
+
+    \foreach \L in {0,1,2} {
+        \foreach \x in {-1,...,11} {
+            \foreach \y in {-1,...,11} {
+                \pgfmathsetmacro{\X}{\x + \skewx*\y}
+                \pgfmathsetmacro{\Y}{\skewy*\y + \layersep*\L}
+                \coordinate (n\L-\x-\y) at (\X, \Y);
+            }
+        }
+    }
+
+    \newcommand{\panvalue}[3]{%
+        \pgfmathtruncatemacro{\xm}{#1-1}%
+        \pgfmathtruncatemacro{\ym}{#2-1}%
+        \filldraw[draw=black!50, line width=0.15pt, fill=white!#3!black]
+            (n0-\xm-\ym) -- (n0-#1-\ym) -- (n0-#1-#2) -- (n0-\xm-#2) -- cycle;
+    }
+    \input{analysis/output/metrics-diagram-pan-values.tex}
+
+    \foreach \L in {1, 2} {
+        \foreach \x in {1,...,10} {
+            \foreach \y in {1,...,10} {
+                \pgfmathtruncatemacro{\xm}{\x-1}
+                \pgfmathtruncatemacro{\ym}{\y-1}
+                \filldraw[draw=black!55, line width=0.15pt, fill=white]
+                    (n\L-\xm-\ym) -- (n\L-\x-\ym) -- (n\L-\x-\y) -- (n\L-\xm-\y) -- cycle;
+            }
+        }
+    }
+
+    \def\ax{6}
+    \def\ay{6}
+    \pgfmathtruncatemacro{\axm}{\ax-1}
+    \pgfmathtruncatemacro{\aym}{\ay-1}
+    \pgfmathtruncatemacro{\plo}{\ax-2}
+    \pgfmathtruncatemacro{\phi}{\ax+1}
+    \pgfmathtruncatemacro{\rlo}{\ax-3}
+    \pgfmathtruncatemacro{\rhi}{\ax+2}
+
+    \filldraw[draw=red!70!black, line width=0.4pt, fill=red!60]
+        (n1-\axm-\aym) -- (n1-\ax-\aym) -- (n1-\ax-\ay) -- (n1-\axm-\ay) -- cycle;
+
+    \filldraw[draw=blue!70!black, line width=0.4pt, fill=blue!60]
+        (n2-\axm-\aym) -- (n2-\ax-\aym) -- (n2-\ax-\ay) -- (n2-\axm-\ay) -- cycle;
+
+    \draw[red!75!black, line width=0.9pt]
+        (n0-\plo-\plo) -- (n0-\phi-\plo) -- (n0-\phi-\phi) -- (n0-\plo-\phi) -- cycle;
+
+    \draw[blue!75!black, line width=0.9pt]
+        (n1-\plo-\plo) -- (n1-\phi-\plo) -- (n1-\phi-\phi) -- (n1-\plo-\phi) -- cycle;
+
+    \draw[orange!90!black, line width=1.1pt]
+        (n0-\rlo-\rlo) -- (n0-\rhi-\rlo) -- (n0-\rhi-\rhi) -- (n0-\rlo-\rhi) -- cycle;
+
+    \coordinate (apex1) at ($(n1-\axm-\aym)!0.5!(n1-\ax-\ay)$);
+    \coordinate (apex2) at ($(n2-\axm-\aym)!0.5!(n2-\ax-\ay)$);
+
+    \draw[red!75!black, line width=0.4pt] (apex1) -- (n0-\plo-\plo);
+    \draw[red!75!black, line width=0.4pt] (apex1) -- (n0-\phi-\plo);
+    \draw[red!75!black, line width=0.4pt] (apex1) -- (n0-\phi-\phi);
+    \draw[red!75!black, line width=0.4pt] (apex1) -- (n0-\plo-\phi);
+
+    \draw[blue!75!black, line width=0.4pt] (apex2) -- (n1-\plo-\plo);
+    \draw[blue!75!black, line width=0.4pt] (apex2) -- (n1-\phi-\plo);
+    \draw[blue!75!black, line width=0.4pt] (apex2) -- (n1-\phi-\phi);
+    \draw[blue!75!black, line width=0.4pt] (apex2) -- (n1-\plo-\phi);
+
+    \node[anchor=east] at (n0--1-5) {Input};
+    \node[anchor=east] at (n1--1-5) {Layer 1};
+    \node[anchor=east] at (n2--1-5) {Layer 2};
+
+    \node[anchor=west, red!70!black] at ($(n0-\rhi-\rhi)+(0.8,0.5)$)
+        {$3 \times 3$ patch};
+    \node[anchor=west, orange!80!black, align=left] at ($(n0-\rhi-\rlo)+(0.8,-0.6)$)
+        {$5 \times 5$ effective\\input window};
+
+\end{tikzpicture}
