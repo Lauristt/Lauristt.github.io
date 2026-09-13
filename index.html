@@ -179,7 +179,9 @@
     .exp-roles > li:not(:last-child)::after {
       content: "";
       position: absolute;
-      left: -17.25px;
+      /* Circle center = -20 + 6/2; translateX centers the stroke on that axis */
+      left: calc(-20px + 6px / 2);
+      transform: translateX(-50%);
       top: calc(0.65em + 9px);
       bottom: calc(-8px - 0.65em + 3px);
       width: 1.5px;
@@ -670,7 +672,7 @@
       <div class="section">
         <h2>About Me</h2>
         <p>
-          <a href="https://finmath.uchicago.edu/about/" target="_blank" rel="noopener noreferrer" style="text-decoration: underline;">MS Financial Mathematics</a> candidate in the Financial Computing Concentration at the University of Chicago, with a focus on systematic trading, machine learning, and research infrastructure. Experienced in building scalable pipelines for financial data extraction, signal generation, model evaluation, and backtesting, with applications across alpha research, macro markets, and risk-aware trading workflows.
+          <a href="https://finmath.uchicago.edu/about/" target="_blank" rel="noopener noreferrer" style="text-decoration: underline;">MS Financial Mathematics</a> candidate in the Financial Computing Concentration at the University of Chicago, with a focus on systematic trading, machine learning, and research infrastructure. Experienced in building scalable pipelines for financial data extraction, signal generation, model evaluation, and backtesting, with applications across alpha research, portfolio optimization, macro markets, and risk-aware trading workflows.
 
         </p>
       </div>
@@ -683,13 +685,13 @@
             <h2>Technical Skills</h2>
             <ul>
               <li><strong>Programming:</strong> Python OOP, C++ OOP, AWS, PostgreSQL, MATLAB, Linux, Slurm, LaTeX, Stata, R Studio</li>
-              <li><strong>Topics:</strong> Research Technology, Machine Learning Infrastructure, AI Infrastructure, Quantitative Research, Statistics & Econometrics</li>
-              <li><strong>Focus:</strong> AI & ML Infrastructure, High-Performance Systems, Evaluation Benchmarks</li>
+              <li><strong>Topics:</strong> Trading Technology, Statistical Learning, Machine Learning / AI Infrastructure, Quantitative Research, Statistics & Econometrics, Portfolio Optimization</li>
+              <li><strong>Focus:</strong> AI & ML Infrastructure, High-Performance Systems, Data Infrastructure, Quantitative Research</li>
             </ul>
         </div>
 
         <div class="section">
-            <h2>Professional Experience</h2>
+            <h2>Work Experience</h2>
             <ul>
               <li class="exp-company">
                 <div class="exp-company-name"><strong>Qube Research & Technologies (QRT)</strong></div>
@@ -699,7 +701,7 @@
                     <div class="exp-role-desc">Applied AI Research Engineer at Systematic Macro Team (Full-time)</div>
                   </li>
                   <li>
-                    <div class="exp-role-title">Intern, Quantitative Technology</div>
+                    <div class="exp-role-title">Intern, Quantitative Research Technology</div>
                     <div class="exp-role-desc">AI Engineering Track at Systematic Macro Team (2026 summer)</div>
                   </li>
                 </ul>
@@ -710,7 +712,7 @@
               </li>
               <!-- <li><strong>Huatai-PineBridge Fund, Quantitative Researcher Intern</strong> – Government Bond Futures Strategy. (Detailes NDA). </li> -->
               <li>
-                <div class="exp-role-title">Guotai Haitong (Jun'an) Securities, Quantitative Researcher Intern</div>
+                <div class="exp-role-title">Guotai Haitong Securities, Quantitative Researcher Intern</div>
                 <div class="exp-role-desc">Fixed Income Alpha Strategies and Commodity Trading (2024 Spring & Summer)</div>
               </li>
               <li>
@@ -1006,8 +1008,8 @@
         <div class="section">
             <h2>Languages & Interests</h2>
             <ul>
-                <li>Mandarin (native), Japanese (basic), Spanish (basic)</li>
-                <li>Hiking, Piano, Marathon, Diving, Volunteer work</li>
+                <li>Mandarin (native), Japanese (basic), Spanish (basic), Cantonese (basic)</li>
+                <li>Hiking, Piano, Volunteer work</li>
             </ul>
         </div>
     </main>
