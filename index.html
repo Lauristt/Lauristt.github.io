@@ -6,12 +6,14 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
+  <meta name="theme-color" content="#f9f9f9">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
   <title>Yuting (Lauris) Li - Quantitative Research Engineer, Machine Learning</title>
   <link rel="icon" type="image/png" href="favicon.png">
   <style>
     html {
         scroll-behavior: smooth;
+        background-color: #f9f9f9;
     }
     body {
     font-family: -apple-system, system-ui, BlinkMacSystemFont,
@@ -498,7 +500,13 @@
             width: 100%;
             height: auto;
             border-right: none;
-            border-bottom: 2px solid #008fe2;
+            border-bottom: 1px solid #e6e6e9;
+            /* match the page background so the stacked layout reads as one column */
+            background: #f9f9f9;
+            background-color: #f9f9f9;
+        }
+        .left-panel::after {
+            display: none;
         }
         .right-panel {
             margin-left: 0;
@@ -566,7 +574,7 @@
         /* No new rules are needed here. */
     }
 
-    /* --- EDUCATION LIST (logo rows) --- */
+    /* --- EDUCATION LIST --- */
     .education-list {
         list-style: none;
         padding-left: 0;
@@ -574,9 +582,9 @@
     }
     .education-list li {
         display: flex;
-        align-items: center;
-        gap: 18px;
-        padding: 16px 0;
+        align-items: baseline;
+        gap: 16px;
+        padding: 13px 0;
         margin-bottom: 0;
         border-bottom: 1px solid #ececec;
     }
@@ -585,26 +593,7 @@
         padding-bottom: 0;
     }
     .education-list li:first-child {
-        padding-top: 4px;
-    }
-    .edu-logo {
-        flex: 0 0 54px;
-        width: 54px;
-        height: 54px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: #ffffff;
-        border: 1px solid #e8e8e8;
-        border-radius: 10px;
-        padding: 7px;
-        box-sizing: border-box;
-    }
-    .edu-logo img {
-        max-width: 100%;
-        max-height: 100%;
-        object-fit: contain;
-        display: block;
+        padding-top: 2px;
     }
     .edu-body {
         flex: 1 1 auto;
@@ -616,6 +605,12 @@
         color: #1a1a1a;
         font-size: 1.02em;
         letter-spacing: .1px;
+    }
+    .edu-logo {
+        height: 1.15em;
+        width: auto;
+        vertical-align: -0.18em;
+        margin-right: 8px;
     }
     .edu-school a {
         color: #1a1a1a;
@@ -644,10 +639,11 @@
     @media (max-width: 768px) {
         .education-list li {
             flex-wrap: wrap;
+            gap: 0;
         }
         .edu-date {
             flex-basis: 100%;
-            padding-left: 70px;
+            padding-left: 0;
             margin-top: 4px;
         }
     }
@@ -979,26 +975,23 @@
             <h2>Education</h2>
             <ul class="education-list">
               <li>
-                <span class="edu-logo"><img src="legacy/uchicago_logo.png" alt="The University of Chicago logo"/></span>
                 <span class="edu-body">
-                  <span class="edu-school">The University of Chicago</span>
+                  <span class="edu-school"><img class="edu-logo" src="legacy/uchicago_logo.png" alt="University of Chicago logo"/>The University of Chicago</span>
                   <span class="edu-detail">M.S. in Financial Mathematics</span>
                 </span>
                 <span class="edu-date">Expected December 2026</span>
               </li>
               <li>
-                <span class="edu-logo"><img src="legacy/sufe_logo.png" alt="Shanghai University of Finance and Economics logo"/></span>
                 <span class="edu-body">
-                  <span class="edu-school"><a href="https://english.sufe.edu.cn/Introduction/list.htm" target="_blank" rel="noopener noreferrer">Shanghai University of Finance and Economics</a></span>
-                  <span class="edu-detail">B.S. in Applied Mathematics, Financial Mathematics</span>
+                  <span class="edu-school"><img class="edu-logo" src="legacy/sufe_logo.png" alt="Shanghai University of Finance and Economics logo"/><a href="https://english.sufe.edu.cn/Introduction/list.htm" target="_blank" rel="noopener noreferrer">Shanghai University of Finance and Economics</a></span>
+                  <span class="edu-detail">B.A. &middot; Finance and Applied Mathematics (Double Major)</span>
                 </span>
                 <span class="edu-date">June 2025</span>
               </li>
               <li>
-                <span class="edu-logo"><img src="legacy/ucberkeley_logo.png" alt="University of California, Berkeley logo"/></span>
                 <span class="edu-body">
-                  <span class="edu-school">University of California, Berkeley</span>
-                  <span class="edu-detail">Visiting Student, Applied Mathematics and Physics</span>
+                  <span class="edu-school"><img class="edu-logo" src="legacy/ucberkeley_logo.png" alt="UC Berkeley logo"/>University of California, Berkeley</span>
+                  <span class="edu-detail">Visiting Student, Department of Mathematics</span>
                 </span>
                 <span class="edu-date">December 2023</span>
               </li>
