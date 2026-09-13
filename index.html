@@ -7,7 +7,7 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-  <title>Yuting (Lauris) Li - Quantitative Developer, Machine Learning</title>
+  <title>Yuting (Lauris) Li - Quantitative Research Engineer, Machine Learning</title>
   <link rel="icon" type="image/png" href="favicon.png">
   <style>
     html {
@@ -153,6 +153,56 @@
     }
     li {
       margin-bottom: 12px;
+    }
+
+    /* LinkedIn-style same-company role grouping */
+    .exp-company-name {
+      margin-bottom: 12px;
+    }
+    .exp-roles {
+      list-style: none;
+      padding-left: 16px;
+      margin: 0;
+      position: relative;
+    }
+    .exp-roles > li {
+      position: relative;
+      padding-left: 12px;
+      margin-bottom: 8px;
+    }
+    .exp-roles > li:last-child {
+      margin-bottom: 0;
+    }
+    /* Line only between roles; small gap under top dot, ends near bottom dot */
+    .exp-roles > li:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      left: -17.25px;
+      top: calc(0.65em + 9px);
+      bottom: calc(-8px - 0.65em + 3px);
+      width: 1.5px;
+      background: #c8cdd3;
+    }
+    /* Small solid dots on the timeline */
+    .exp-roles > li::before {
+      content: "";
+      position: absolute;
+      left: -20px;
+      top: 0.65em;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #8a9199;
+      box-sizing: border-box;
+      z-index: 1;
+    }
+    .exp-role-title {
+      font-weight: 600;
+      color: #2f2f2f;
+    }
+    .exp-role-desc {
+      color: #505050;
+      font-size: 0.95em;
     }
     .section {
       margin-bottom: 30px;
@@ -515,6 +565,93 @@
         /* FIX 3: Code blocks are already handled correctly by 'overflow-x: auto' */
         /* No new rules are needed here. */
     }
+
+    /* --- EDUCATION LIST (logo rows) --- */
+    .education-list {
+        list-style: none;
+        padding-left: 0;
+        margin: 0;
+    }
+    .education-list li {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        padding: 16px 0;
+        margin-bottom: 0;
+        border-bottom: 1px solid #ececec;
+    }
+    .education-list li:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+    .education-list li:first-child {
+        padding-top: 4px;
+    }
+    .edu-logo {
+        flex: 0 0 54px;
+        width: 54px;
+        height: 54px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #ffffff;
+        border: 1px solid #e8e8e8;
+        border-radius: 10px;
+        padding: 7px;
+        box-sizing: border-box;
+    }
+    .edu-logo img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        display: block;
+    }
+    .edu-body {
+        flex: 1 1 auto;
+        min-width: 0;
+    }
+    .edu-school {
+        display: block;
+        font-weight: 600;
+        color: #1a1a1a;
+        font-size: 1.02em;
+        letter-spacing: .1px;
+    }
+    .edu-school a {
+        color: #1a1a1a;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(0,120,171,0.35);
+        transition: color .18s ease, border-color .18s ease;
+    }
+    .edu-school a:hover {
+        color: rgb(0, 120, 171);
+        border-bottom-color: rgb(0, 120, 171);
+        text-decoration: none;
+    }
+    .edu-detail {
+        display: block;
+        color: #5a5a5a;
+        font-size: 0.95em;
+        margin-top: 2px;
+    }
+    .edu-date {
+        flex: 0 0 auto;
+        color: #8a8a8a;
+        font-size: 0.88em;
+        white-space: nowrap;
+        padding-left: 14px;
+    }
+    @media (max-width: 768px) {
+        .education-list li {
+            flex-wrap: wrap;
+        }
+        .edu-date {
+            flex-basis: 100%;
+            padding-left: 70px;
+            margin-top: 4px;
+        }
+    }
+
   </style>
   <link rel="stylesheet" href="details.css">
 </head>
@@ -528,7 +665,7 @@
 
       <h1>Yuting (Lauris) Li</h1>
       <p>
-        <strong>Location:</strong> Chicago, IL, USA<br/>
+        <strong>Location:</strong> Chicago, IL, USA | Hong Kong SAR<br/>
         <strong>Email:</strong> laurisli@uchicago.edu<br/>
         <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/yuting-li-4146a4287/" target="_blank">Yuting Li</a><br/>
         <strong>CV:</strong> <a href="Yuting_CV.pdf" target="_blank">View</a>, <a href="Yuting_CV.pdf" download>Download</a>
@@ -537,7 +674,7 @@
       <div class="section">
         <h2>About Me</h2>
         <p>
-          <a href="https://finmath.uchicago.edu/about/" target="_blank" rel="noopener noreferrer" style="text-decoration: underline;">MS Financial Mathematics</a> candidate in the Financial Computing Concentration at the University of Chicago, with a focus on systematic trading, machine learning, and buy-side research infrastructure. Experienced in building scalable pipelines for financial data extraction, signal generation, model evaluation, and backtesting, with applications across alpha research, macro markets, and risk-aware trading workflows.
+          <a href="https://finmath.uchicago.edu/about/" target="_blank" rel="noopener noreferrer" style="text-decoration: underline;">MS Financial Mathematics</a> candidate in the Financial Computing Concentration at the University of Chicago, with a focus on systematic trading, machine learning, and research infrastructure. Experienced in building scalable pipelines for financial data extraction, signal generation, model evaluation, and backtesting, with applications across alpha research, macro markets, and risk-aware trading workflows.
 
         </p>
       </div>
@@ -550,7 +687,7 @@
             <h2>Technical Skills</h2>
             <ul>
               <li><strong>Programming:</strong> Python OOP, C++ OOP, AWS, PostgreSQL, MATLAB, Linux, Slurm, LaTeX, Stata, R Studio</li>
-              <li><strong>Topics:</strong> Research Platform Architecture, Machine Learning Infrastructure, Deep Learning, Credit & Derivatives Markets, Statistical Modeling & Econometrics, Time-Series Modeling</li>
+              <li><strong>Topics:</strong> Research Technology, Machine Learning Infrastructure, AI Infrastructure, Quantitative Research, Statistics & Econometrics</li>
               <li><strong>Focus:</strong> AI & ML Infrastructure, High-Performance Systems, Evaluation Benchmarks</li>
             </ul>
         </div>
@@ -558,10 +695,28 @@
         <div class="section">
             <h2>Professional Experience</h2>
             <ul>
-              <li><strong>Qube Research & Technologies(QRT), Quantitative Technologist Intern</strong> – AI Engineering Track at systematic macro team (2026 summer).</li>
-              <li><strong>Neuberger Berman, Quantitative Researcher - University of Chicago Project Lab</strong> – Developed systematic machine-learning and regression models to assess global bond-market relative value and built automated Linux-based pipelines for macro and real-time bond data analysis.</li>
+              <li class="exp-company">
+                <div class="exp-company-name"><strong>Qube Research & Technologies (QRT)</strong></div>
+                <ul class="exp-roles">
+                  <li>
+                    <div class="exp-role-title">Quantitative Technologist</div>
+                    <div class="exp-role-desc">Applied AI Research Engineer at Systematic Macro Team.</div>
+                  </li>
+                  <li>
+                    <div class="exp-role-title">Intern, Quantitative Technology</div>
+                    <div class="exp-role-desc">AI Engineering Track at Systematic Macro Team (2026 summer).</div>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <div class="exp-role-title">Neuberger Berman, Quantitative Researcher - University of Chicago Project Lab</div>
+                <div class="exp-role-desc">Developed systematic machine-learning and regression models to assess global bond-market relative value and built automated Linux-based pipelines for macro and real-time bond data analysis.</div>
+              </li>
               <!-- <li><strong>Huatai-PineBridge Fund, Quantitative Researcher Intern</strong> – Government Bond Futures Strategy. (Detailes NDA). </li> -->
-              <li><strong>Guotai Haitong (Jun'an) Securities, Quantitative Researcher Intern</strong> – Designed and backtested 3 factor-based alpha strategies on treasury bond futures, each with Sharpe ratio > 2.0. Built cluster-enhanced residual regression models to forecast fund duration, improving accuracy by 18%. Authored fixed-income hedge report reducing strategy drawdown by 8% (Q4 2022–Q1 2024).</li>
+              <li>
+                <div class="exp-role-title">Guotai Haitong (Jun'an) Securities, Quantitative Researcher Intern</div>
+                <div class="exp-role-desc">Designed and backtested 3 factor-based alpha strategies on treasury bond futures, each with Sharpe ratio > 2.0. Built cluster-enhanced residual regression models to forecast fund duration, improving accuracy by 18%. Authored fixed-income hedge report reducing strategy drawdown by 8% (Q4 2022–Q1 2024).</div>
+              </li>
             </ul>
         </div>
 
@@ -822,10 +977,31 @@
 
         <div class="section">
             <h2>Education</h2>
-            <ul>
-              <li><strong>The University of Chicago</strong> – M.S. in Financial Mathematics, Expected December 2026</li>
-              <li><strong>Shanghai University of Finance and Economics</strong> – Bachelor's Degree, Finance and Applied Mathematics (Double Major), June 2025</li>
-              <li><strong>University of California, Berkeley</strong> – Visiting Student in Department of Mathematics, December 2023</li>
+            <ul class="education-list">
+              <li>
+                <span class="edu-logo"><img src="legacy/uchicago_logo.png" alt="The University of Chicago logo"/></span>
+                <span class="edu-body">
+                  <span class="edu-school">The University of Chicago</span>
+                  <span class="edu-detail">M.S. in Financial Mathematics</span>
+                </span>
+                <span class="edu-date">Expected December 2026</span>
+              </li>
+              <li>
+                <span class="edu-logo"><img src="legacy/sufe_logo.png" alt="Shanghai University of Finance and Economics logo"/></span>
+                <span class="edu-body">
+                  <span class="edu-school"><a href="https://english.sufe.edu.cn/Introduction/list.htm" target="_blank" rel="noopener noreferrer">Shanghai University of Finance and Economics</a></span>
+                  <span class="edu-detail">B.S. in Applied Mathematics, Financial Mathematics</span>
+                </span>
+                <span class="edu-date">June 2025</span>
+              </li>
+              <li>
+                <span class="edu-logo"><img src="legacy/ucberkeley_logo.png" alt="University of California, Berkeley logo"/></span>
+                <span class="edu-body">
+                  <span class="edu-school">University of California, Berkeley</span>
+                  <span class="edu-detail">Visiting Student, Applied Mathematics and Physics</span>
+                </span>
+                <span class="edu-date">December 2023</span>
+              </li>
             </ul>
         </div>
         
